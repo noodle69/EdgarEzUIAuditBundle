@@ -1,0 +1,14 @@
+edgar.audit.dashboard:
+    path: /audit/dashboard
+    defaults:
+        _controller: 'EdgarEzAuditBundle:Audit:dashboard'
+
+edgar.audit.configure:
+    path: /audit/configure
+    defaults:
+        _controller: 'EdgarEzAuditBundle:Audit:configure'
+
+edgar.audit.export:
+    path: /audit/export
+    defaults:
+        _controller: 'EdgarEzAuditBundle:Audit:export'

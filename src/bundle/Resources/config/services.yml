@@ -1,0 +1,17 @@
+imports:
+    - { resource: controllers.yml }
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Edgar\EzAuditBundle\Cron\AuditExportCron:
+        tags:
+          - { name: "edgar.cron", alias: "audit_export", priority: 100, expression: "*/5 * * * *" }
+
+    Edgar\EzAuditBundle\EventListener\ConfigureMenuListener:
+        public: true
+        tags:
+          - { name: kernel.event_listener, event: ezplatform_admin_ui.menu_configure.main_menu, method: onMenuConfigure }
