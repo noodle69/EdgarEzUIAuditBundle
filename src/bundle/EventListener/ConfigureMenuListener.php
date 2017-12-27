@@ -3,7 +3,6 @@
 namespace Edgar\EzAuditBundle\EventListener;
 
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
-use EzSystems\EzPlatformAdminUi\Menu\MainMenuBuilder;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use JMS\TranslationBundle\Model\Message;
 use Knp\Menu\ItemInterface;
@@ -22,8 +21,7 @@ class ConfigureMenuListener implements TranslationContainerInterface
     {
         $menu = $event->getMenu();
 
-        $contentMenu = $menu->getChild(MainMenuBuilder::ITEM_CONTENT);
-        $auditMenu = $contentMenu->getParent()->addChild(self::ITEM_AUDIT, []);
+        $auditMenu = $menu->addChild(self::ITEM_AUDIT, []);
 
         $this->addAuditMenuItems($auditMenu);
     }
