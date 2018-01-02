@@ -1,0 +1,29 @@
+{% extends 'EzPlatformAdminUiBundle::layout.html.twig' %}
+
+{% trans_default_domain 'edgarezuiaudit' %}
+
+{% block body_class %}{% endblock %}
+
+{% block breadcrumbs %}
+    {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
+        { value: 'breadcrumb.audit'|trans(domain='messages')|desc('Audit') , },
+        { url: path('edgar.audit.dashboard'), value: 'dashboard.breadcrumb.view'|trans|desc('Dashboard') },
+    ]} %}
+{% endblock %}
+
+{% block page_title %}
+    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+        title: 'dashboard.view.title'|trans|desc('Audit dashboard'),
+        iconName: 'browse'
+    } %}
+{% endblock %}
+
+{% block content %}
+    <section class="container mt-4">
+        {{ form_start(form_filter_audit, { 'action': path('edgar.audit.dashboard') }) }}
+            <div class="input-group">
+                {{ form_widget(form_filter_audit.audit_types) }}
+            </div>
+        {{ form_end(form_filter_audit) }}
+    </section>
+{% endblock %}

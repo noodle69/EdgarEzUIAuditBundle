@@ -1,0 +1,21 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Edgar\EzUIAuditBundle\Audit\Section\AssignSectionAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: SectionService\AssignSectionSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Section\CreateSectionAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: SectionService\CreateSectionSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Section\DeleteSectionAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: SectionService\DeleteSectionSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Section\UpdateSectionAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: SectionService\UpdateSectionSignal }

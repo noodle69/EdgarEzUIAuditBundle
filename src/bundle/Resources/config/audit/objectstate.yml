@@ -1,0 +1,37 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Edgar\EzUIAuditBundle\Audit\ObjectState\CreateObjectStateAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: ObjectStateService\CreateObjectStateSignal }
+
+    Edgar\EzUIAuditBundle\Audit\ObjectState\CreateObjectStateGroupAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: ObjectStateService\CreateObjectStateGroupSignal }
+
+    Edgar\EzUIAuditBundle\Audit\ObjectState\DeleteObjectStateAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: ObjectStateService\DeleteObjectStateSignal }
+
+    Edgar\EzUIAuditBundle\Audit\ObjectState\DeleteObjectStateGroupAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: ObjectStateService\DeleteObjectStateGroupSignal }
+
+    Edgar\EzUIAuditBundle\Audit\ObjectState\SetContentStateAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: ObjectStateService\SetContentStateSignal }
+
+    Edgar\EzUIAuditBundle\Audit\ObjectState\SetPriorityOfObjectStateAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: ObjectStateService\SetPriorityOfObjectStateSignal }
+
+    Edgar\EzUIAuditBundle\Audit\ObjectState\UpdateObjectStateAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: ObjectStateService\UpdateObjectStateSignal }
+
+    Edgar\EzUIAuditBundle\Audit\ObjectState\UpdateObjectStateGroupAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: ObjectStateService\UpdateObjectStateGroupSignal }

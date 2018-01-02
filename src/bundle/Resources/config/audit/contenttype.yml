@@ -1,0 +1,61 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Edgar\EzUIAuditBundle\Audit\ContentType\AddFieldDefinitionAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: ContentTypeService\AddFieldDefinitionSignal }
+
+    Edgar\EzUIAuditBundle\Audit\ContentType\AssignContentTypeGroupAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: ContentTypeService\AssignContentTypeGroupSignal }
+
+    Edgar\EzUIAuditBundle\Audit\ContentType\CopyContentTypeAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: ContentTypeService\CopyContentTypeSignal }
+
+    Edgar\EzUIAuditBundle\Audit\ContentType\CreateContentTypeAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: ContentTypeService\CreateContentTypeSignal }
+
+    Edgar\EzUIAuditBundle\Audit\ContentType\CreateContentTypeDraftAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: ContentTypeService\CreateContentTypeDraftSignal }
+
+    Edgar\EzUIAuditBundle\Audit\ContentType\CreateContentTypeGroupAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: ContentTypeService\CreateContentTypeGroupSignal }
+
+    Edgar\EzUIAuditBundle\Audit\ContentType\DeleteContentTypeAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: ContentTypeService\DeleteContentTypeSignal }
+
+    Edgar\EzUIAuditBundle\Audit\ContentType\DeleteContentTypeGroupAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: ContentTypeService\DeleteContentTypeGroupSignal }
+
+    Edgar\EzUIAuditBundle\Audit\ContentType\PublishContentTypeDraftAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: ContentTypeService\PublishContentTypeDraftSignal }
+
+    Edgar\EzUIAuditBundle\Audit\ContentType\RemoveFieldDefinitionAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: ContentTypeService\RemoveFieldDefinitionSignal }
+
+    Edgar\EzUIAuditBundle\Audit\ContentType\UnassignContentTypeGroupAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: ContentTypeService\UnassignContentTypeGroupSignal }
+
+    Edgar\EzUIAuditBundle\Audit\ContentType\UpdateContentTypeDraftAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: ContentTypeService\UpdateContentTypeDraftSignal }
+
+    Edgar\EzUIAuditBundle\Audit\ContentType\UpdateContentTypeGroupAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: ContentTypeService\UpdateContentTypeGroupSignal }
+
+    Edgar\EzUIAuditBundle\Audit\ContentType\UpdateFieldDefinitionAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: ContentTypeService\UpdateFieldDefinitionSignal }

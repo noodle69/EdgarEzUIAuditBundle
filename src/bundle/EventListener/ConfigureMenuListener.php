@@ -1,6 +1,6 @@
 <?php
 
-namespace Edgar\EzAuditBundle\EventListener;
+namespace Edgar\EzUIAuditBundle\EventListener;
 
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;

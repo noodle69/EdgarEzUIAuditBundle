@@ -1,5 +1,5 @@
 {
-  "name": "edgar/ez-audit-bundle",
+  "name": "edgar/ez-uiaudit-bundle",
   "license": "GPL-2.0",
   "type": "ezplatform-bundle",
   "description": "eZ Platform audit configuration and exploitation",
@@ -10,12 +10,12 @@
   ],
   "autoload": {
     "psr-4": {
-      "Edgar\\EzAuditBundle\\": "src/bundle/",
-      "Edgar\\EzAudit\\": "src/lib/"
+      "Edgar\\EzUIAuditBundle\\": "src/bundle/",
+      "Edgar\\EzUIAudit\\": "src/lib/"
     }
   },
   "autoload-dev": {
-    "psr-4": { "Edgar\\EzAuditBundle\\Tests\\": "src/bundle/Tests" }
+    "psr-4": { "Edgar\\EzUIAuditBundle\\Tests\\": "src/bundle/Tests" }
   },
   "require": {
     "php": ">=7.1",

@@ -1,5 +1,6 @@
 imports:
     - { resource: controllers.yml }
+    - { resource: audits.yml }
 
 services:
     _defaults:
@@ -7,11 +8,17 @@ services:
         autoconfigure: true
         public: false
 
-    Edgar\EzAuditBundle\Cron\AuditExportCron:
+    Edgar\EzUIAudit\Handler\:
+        resource: "../../../lib/Handler/*"
+        public: true
+
+    Edgar\EzUIAuditBundle\Cron\AuditExportCron:
         tags:
           - { name: "edgar.cron", alias: "audit_export", priority: 100, expression: "*/5 * * * *" }
 
-    Edgar\EzAuditBundle\EventListener\ConfigureMenuListener:
+    Edgar\EzUIAuditBundle\EventListener\ConfigureMenuListener:
         public: true
         tags:
           - { name: kernel.event_listener, event: ezplatform_admin_ui.menu_configure.main_menu, method: onMenuConfigure }
+
+    Edgar\EzUIAudit\Form\Type\AuditTypeChoiceType: ~

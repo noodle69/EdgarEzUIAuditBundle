@@ -1,14 +1,14 @@
-# EdgarEzAuditBundle
+# EdgarEzUIAuditBundle
 
 ## Installation
 
 ### Get the bundle using composer
 
-Add EdgarEzAuditBundle by running this command from the terminal at the root of
+Add EdgarEzUIAuditBundle by running this command from the terminal at the root of
 your symfony project:
 
 ```bash
-composer require edgar/ez-audit-bundle
+composer require edgar/ez-uiaudit-bundle
 ```
 
 ## Enable the bundle
@@ -21,7 +21,7 @@ public function registerBundles()
 {
     $bundles = array(
         // ...
-        new Edgar\EzAuditBundle\EdgarEzAuditBundle(),
+        new Edgar\EzUIAuditBundle\EdgarEzUIAuditBundle(),
         // ...
     );
 }
@@ -48,8 +48,8 @@ php bin/console doctrine:schema:update --force
 Add to your global configuration app/config/routing.yml
 
 ```yaml
-edgar.ezaudit:
-    resource: '@EdgarEzAuditBundle/Resources/config/routing.yml'
+edgar.ezuiaudit:
+    resource: '@EdgarEzUIAuditBundle/Resources/config/routing.yml'
     defaults:
         siteaccess_group_whitelist: 'admin_group'    
 ```

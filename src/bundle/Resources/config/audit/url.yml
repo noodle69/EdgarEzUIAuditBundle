@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Edgar\EzUIAuditBundle\Audit\URL\UpdateUrlAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: URLService\UpdateUrlSignal }

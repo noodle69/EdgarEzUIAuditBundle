@@ -1,6 +1,6 @@
 <?php
 
-namespace Edgar\EzAudit\Repository;
+namespace Edgar\EzUIAudit\Repository;
 
 use Doctrine\ORM\EntityRepository;
 

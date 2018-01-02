@@ -4,7 +4,7 @@ services:
         autoconfigure: true
         public: false
 
-    Edgar\EzAuditBundle\Controller\:
+    Edgar\EzUIAuditBundle\Controller\:
         resource: "../../Controller/*"
         public: true
         tags: ['controller.service_arguments']

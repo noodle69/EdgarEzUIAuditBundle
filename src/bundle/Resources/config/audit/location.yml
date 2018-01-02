@@ -1,0 +1,38 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Edgar\EzUIAuditBundle\Audit\Location\CopySubtreeAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: LocationService\CopySubtreeSignal}
+
+    Edgar\EzUIAuditBundle\Audit\Location\CreateLocationAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: LocationService\CreateLocationSignal}
+
+    Edgar\EzUIAuditBundle\Audit\Location\DeleteLocationAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: LocationService\DeleteLocationSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Location\HideLocationAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: LocationService\HideLocationSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Location\MoveSubtreeAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: LocationService\MoveSubtreeSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Location\SwapLocationAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: LocationService\SwapLocationSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Location\UnhideLocationAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: LocationService\UnhideLocationSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Location\UpdateLocationAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: LocationService\UpdateLocationSignal }
+

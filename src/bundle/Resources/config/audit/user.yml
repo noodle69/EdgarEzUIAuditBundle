@@ -1,0 +1,41 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Edgar\EzUIAuditBundle\Audit\User\AssignUserToUserGroupAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: UserService\AssignUserToUserGroupSignal }
+
+    Edgar\EzUIAuditBundle\Audit\User\CreateUserAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: UserService\CreateUserSignal }
+
+    Edgar\EzUIAuditBundle\Audit\User\CreateUserGroupAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: UserService\CreateUserGroupSignal }
+
+    Edgar\EzUIAuditBundle\Audit\User\DeleteUserAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: UserService\DeleteUserSignal }
+
+    Edgar\EzUIAuditBundle\Audit\User\DeleteUserGroupAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: UserService\DeleteUserGroupSignal }
+
+    Edgar\EzUIAuditBundle\Audit\User\MoveUserGroupAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: UserService\MoveUserGroupSignal }
+
+    Edgar\EzUIAuditBundle\Audit\User\UnAssignUserFromUserGroupAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: UserService\UnAssignUserFromUserGroupSignal }
+
+    Edgar\EzUIAuditBundle\Audit\User\UpdateUserAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: UserService\UpdateUserSignal }
+
+    Edgar\EzUIAuditBundle\Audit\User\UpdateUserGroupAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: UserService\UpdateUserGroupSignal }

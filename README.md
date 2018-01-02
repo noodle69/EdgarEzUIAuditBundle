@@ -1,10 +1,10 @@
-# EdgarEzAuditBundle
+# EdgarEzUIAuditBundle
 
 eZ Platform audit configuration and exploitation
 
-[![Downloads](https://img.shields.io/packagist/dt/edgar/ez-audit-bundle.svg?style=flat-square)](https://packagist.org/packages/edgar/ez-audit-bundle)
-[![Latest release](https://img.shields.io/github/release/noodle69/EdgarEzAuditBundle.svg?style=flat-square)](https://github.com/noodle69/EdgarEzAuditBundle/releases)
-[![License](https://img.shields.io/packagist/l/edgar/ez-audit-bundle.svg?style=flat-square)](LICENSE)
+[![Downloads](https://img.shields.io/packagist/dt/edgar/ez-uiaudit-bundle.svg?style=flat-square)](https://packagist.org/packages/edgar/ez-uiaudit-bundle)
+[![Latest release](https://img.shields.io/github/release/noodle69/EdgarEzUIAuditBundle.svg?style=flat-square)](https://github.com/noodle69/EdgarEzUIAuditBundle/releases)
+[![License](https://img.shields.io/packagist/l/edgar/ez-uiaudit-bundle.svg?style=flat-square)](LICENSE)
 
 ## Description
 

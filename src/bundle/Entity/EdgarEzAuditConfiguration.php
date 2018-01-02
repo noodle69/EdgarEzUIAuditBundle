@@ -1,13 +1,13 @@
 <?php
 
-namespace Edgar\EzAuditBundle\Entity;
+namespace Edgar\EzUIAuditBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * EdgarEzAuditConfiguration
  *
- * @ORM\Entity(repositoryClass="Edgar\EzAudit\Repository\EdgarEzAuditConfigurationRepository")
+ * @ORM\Entity(repositoryClass="Edgar\EzUIAudit\Repository\EdgarEzAuditConfigurationRepository")
  * @ORM\Table(name="edgar_ez_audit_configuration")
  */
 class EdgarEzAuditConfiguration

@@ -1,10 +1,10 @@
 <?php
 
-namespace Edgar\EzAuditBundle\Cron;
+namespace Edgar\EzUIAuditBundle\Cron;
 
 use Doctrine\ORM\EntityManager;
 use Edgar\Cron\Cron\AbstractCron;
-use Edgar\EzAuditBundle\Entity\EdgarEzAuditExport;
+use Edgar\EzUIAuditBundle\Entity\EdgarEzAuditExport;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 

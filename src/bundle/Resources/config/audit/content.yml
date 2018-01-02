@@ -1,0 +1,57 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Edgar\EzUIAuditBundle\Audit\Content\AddRelationAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: ContentService\AddRelationSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Content\AddTranslationInfoAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: ContentService\AddTranslationInfoSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Content\CopyContentAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: ContentService\CopyContentSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Content\CreateContentAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: ContentService\CreateContentSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Content\CreateContentDraftAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: ContentService\CreateContentDraftSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Content\DeleteContentAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: ContentService\DeleteContentSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Content\DeleteRelationAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: ContentService\DeleteRelationSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Content\DeleteTranslationAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: ContentService\DeleteTranslationSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Content\DeleteVersionAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: ContentService\DeleteVersionSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Content\PublishVersionAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: ContentService\PublishVersionSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Content\TranslateVersionAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: ContentService\TranslateVersionSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Content\UpdateContentAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: ContentService\UpdateContentSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Content\UpdateContentMetadataAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: ContentService\UpdateContentMetadataSignal }

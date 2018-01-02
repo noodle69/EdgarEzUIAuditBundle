@@ -1,0 +1,13 @@
+imports:
+    - { resource: audit/content.yml }
+    - { resource: audit/contenttype.yml }
+    - { resource: audit/language.yml }
+    - { resource: audit/location.yml }
+    - { resource: audit/objectstate.yml }
+    - { resource: audit/role.yml }
+    - { resource: audit/section.yml }
+    - { resource: audit/trash.yml }
+    - { resource: audit/url.yml }
+    - { resource: audit/urlalias.yml }
+    - { resource: audit/urlwildcard.yml }
+    - { resource: audit/user.yml }

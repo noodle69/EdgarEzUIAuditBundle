@@ -1,0 +1,17 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Edgar\EzUIAuditBundle\Audit\URLWildcard\CreateAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: URLWildcardService\CreateSignal }
+
+    Edgar\EzUIAuditBundle\Audit\URLWildcard\RemoveAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: URLWildcardService\RemoveSignal }
+
+    Edgar\EzUIAuditBundle\Audit\URLWildcard\TranslateAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: URLWildcardService\TranslateSignal }

@@ -1,0 +1,21 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Edgar\EzUIAuditBundle\Audit\Trash\DeleteTrashItemAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: TrashService\DeleteTrashItemSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Trash\EmptyTrashAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: TrashService\EmptyTrashSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Trash\RecoverAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: TrashService\RecoverSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Trash\TrashAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: TrashService\TrashSignal }

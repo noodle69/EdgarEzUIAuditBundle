@@ -1,0 +1,73 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Edgar\EzUIAuditBundle\Audit\Role\AddPolicyAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: RoleService\AddPolicySignal }
+
+    Edgar\EzUIAuditBundle\Audit\Role\AddPolicyByRoleDraftAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: RoleService\AddPolicyByRoleDraftSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Role\AssignRoleToUserAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: RoleService\AssignRoleToUserSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Role\AssignRoleToUserGroupAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: RoleService\AssignRoleToUserGroupSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Role\CreateRoleAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: RoleService\CreateRoleSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Role\CreateRoleDraftAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: RoleService\CreateRoleDraftSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Role\DeleteRoleAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: RoleService\DeleteRoleSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Role\DeleteRoleDraftAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: RoleService\DeleteRoleDraftSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Role\PublishRoleDraftAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: RoleService\PublishRoleDraftSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Role\RemovePolicyAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: RoleService\RemovePolicySignal }
+
+    Edgar\EzUIAuditBundle\Audit\Role\RemovePolicyByRoleDraftAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: RoleService\RemovePolicyByRoleDraftSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Role\RemoveRoleAssignmentAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: RoleService\RemoveRoleAssignmentSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Role\UnassignRoleFromUserAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: RoleService\UnassignRoleFromUserSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Role\UnassignRoleFromUserGroupAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: RoleService\UnassignRoleFromUserGroupSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Role\UpdatePolicyAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: RoleService\UpdatePolicySignal }
+
+    Edgar\EzUIAuditBundle\Audit\Role\UpdateRoleAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: RoleService\UpdateRoleSignal }
+
+    Edgar\EzUIAuditBundle\Audit\Role\UpdateRoleDraftAudit:
+        tags:
+            - { name: ezpublish.api.slot, signal: RoleService\UpdateRoleDraftSignal }
