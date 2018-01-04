@@ -9,8 +9,17 @@ class RemoveFieldDefinitionAudit extends AbstractAudit
 {
     public function receive(Signal $signal)
     {
-        if (!$signal instanceof Signal\ContentTypeService\RemoveFieldDefinitionSignal) {
+        if (!$signal instanceof Signal\ContentTypeService\RemoveFieldDefinitionSignal
+            || !$this->auditService->isConfigured(self::class)
+        ) {
             return;
         }
+
+        $this->infos = [
+            'contentTypeDraftId' => $signal->contentTypeDraftId,
+            'fieldDefinitionId' => $signal->fieldDefinitionId,
+        ];
+
+        $this->auditService->log($this);
     }
 }

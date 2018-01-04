@@ -9,8 +9,16 @@ class DeleteContentTypeGroupAudit extends AbstractAudit
 {
     public function receive(Signal $signal)
     {
-        if (!$signal instanceof Signal\ContentTypeService\DeleteContentTypeGroupSignal) {
+        if (!$signal instanceof Signal\ContentTypeService\DeleteContentTypeGroupSignal
+            || !$this->auditService->isConfigured(self::class)
+        ) {
             return;
         }
+
+        $this->infos = [
+            'contentTypeGroupId' => $signal->contentTypeGroupId,
+        ];
+
+        $this->auditService->log($this);
     }
 }

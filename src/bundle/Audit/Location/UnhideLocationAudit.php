@@ -9,8 +9,19 @@ class UnhideLocationAudit extends AbstractAudit
 {
     public function receive(Signal $signal)
     {
-        if (!$signal instanceof Signal\LocationService\UnhideLocationSignal) {
+        if (!$signal instanceof Signal\LocationService\UnhideLocationSignal
+            || !$this->auditService->isConfigured(self::class)
+        ) {
             return;
         }
+
+        $this->infos = [
+            'locationId' => $signal->locationId,
+            'currentVersionNo' => $signal->currentVersionNo,
+            'parentLocationId' => $signal->parentLocationId,
+            'contentId' => $signal->contentId,
+        ];
+
+        $this->auditService->log($this);
     }
 }

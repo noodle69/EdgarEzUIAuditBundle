@@ -9,8 +9,16 @@ class TranslateAudit extends AbstractAudit
 {
     public function receive(Signal $signal)
     {
-        if (!$signal instanceof Signal\URLWildcardService\TranslateSignal) {
+        if (!$signal instanceof Signal\URLWildcardService\TranslateSignal
+            || !$this->auditService->isConfigured(self::class)
+        ) {
             return;
         }
+
+        $this->infos = [
+            'url' => $signal->url,
+        ];
+
+        $this->auditService->log($this);
     }
 }

@@ -3,7 +3,6 @@
 namespace Edgar\EzUIAudit\Form\Data;
 
 use Edgar\EzUIAudit\Audit\AuditInterface;
-use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class FilterAuditData

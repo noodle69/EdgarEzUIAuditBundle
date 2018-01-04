@@ -28,4 +28,9 @@ class AuditHandler
     {
         return $this->audits;
     }
+
+    public function getAuditsData(): array
+    {
+
+    }
 }

@@ -9,8 +9,16 @@ class DeleteObjectStateAudit extends AbstractAudit
 {
     public function receive(Signal $signal)
     {
-        if (!$signal instanceof Signal\ObjectStateService\DeleteObjectStateSignal) {
+        if (!$signal instanceof Signal\ObjectStateService\DeleteObjectStateSignal
+            || !$this->auditService->isConfigured(self::class)
+        ) {
             return;
         }
+
+        $this->infos = [
+            'objectStateId' => $signal->objectStateId,
+        ];
+
+        $this->auditService->log($this);
     }
 }

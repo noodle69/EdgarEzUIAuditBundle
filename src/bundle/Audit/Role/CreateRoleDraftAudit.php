@@ -9,8 +9,16 @@ class CreateRoleDraftAudit extends AbstractAudit
 {
     public function receive(Signal $signal)
     {
-        if (!$signal instanceof Signal\RoleService\CreateRoleDraftSignal) {
+        if (!$signal instanceof Signal\RoleService\CreateRoleDraftSignal
+            || !$this->auditService->isConfigured(self::class)
+        ) {
             return;
         }
+
+        $this->infos = [
+            'roleId' => $signal->roleId,
+        ];
+
+        $this->auditService->log($this);
     }
 }

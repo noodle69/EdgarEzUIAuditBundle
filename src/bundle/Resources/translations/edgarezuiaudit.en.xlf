@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="9d53c02e11d475d602c8a305ae8bc8f4954c29d5" resname="configure.breadcrumb.view">
+        <source>Configuration</source>
+        <target>Configuration</target>
+        <note>key: configure.breadcrumb.view</note>
+      </trans-unit>
+      <trans-unit id="0839e2d368b063dfae4346f53bdfe16288511ae4" resname="configure.view.title">
+        <source>Audit configuration</source>
+        <target>Audit configuration</target>
+        <note>key: configure.view.title</note>
+      </trans-unit>
+      <trans-unit id="b6310eb427056a983686302115afcd9d98e4d5a5" resname="configure_audit.submit">
+        <source>Submit</source>
+        <target>Submit</target>
+        <note>key: configure_audit.submit</note>
+      </trans-unit>
+      <trans-unit id="0b22c2fe681f21932bb7b31568da148d12343d80" resname="dashboard.breadcrumb.view">
+        <source>Dashboard</source>
+        <target>Dashboard</target>
+        <note>key: dashboard.breadcrumb.view</note>
+      </trans-unit>
+      <trans-unit id="1bf5ad5c9ffd78f35f7de61e7e7d43b8443b4039" resname="dashboard.view.title">
+        <source>Audit dashboard</source>
+        <target>Audit dashboard</target>
+        <note>key: dashboard.view.title</note>
+      </trans-unit>
+      <trans-unit id="87612c420c5fa55d80affb05c55a0afb46ca2c73" resname="export.breadcrumb.view">
+        <source>Export</source>
+        <target state="new">Export</target>
+        <note>key: export.breadcrumb.view</note>
+      </trans-unit>
+      <trans-unit id="e48274a5e83400b75cff0478a80b93a48aace58f" resname="export.view.title">
+        <source>Audit export</source>
+        <target state="new">Audit export</target>
+        <note>key: export.view.title</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

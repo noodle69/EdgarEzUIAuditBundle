@@ -9,8 +9,16 @@ class DeleteRoleDraftAudit extends AbstractAudit
 {
     public function receive(Signal $signal)
     {
-        if (!$signal instanceof Signal\RoleService\DeleteRoleDraftSignal) {
+        if (!$signal instanceof Signal\RoleService\DeleteRoleDraftSignal
+            || !$this->auditService->isConfigured(self::class)
+        ) {
             return;
         }
+
+        $this->infos = [
+            'roleId' => $signal->roleId,
+        ];
+
+        $this->auditService->log($this);
     }
 }

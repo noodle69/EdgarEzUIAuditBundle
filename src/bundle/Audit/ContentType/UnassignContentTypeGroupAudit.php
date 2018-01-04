@@ -9,8 +9,17 @@ class UnassignContentTypeGroupAudit extends AbstractAudit
 {
     public function receive(Signal $signal)
     {
-        if (!$signal instanceof Signal\ContentTypeService\UnassignContentTypeGroupSignal) {
+        if (!$signal instanceof Signal\ContentTypeService\UnassignContentTypeGroupSignal
+            || !$this->auditService->isConfigured(self::class)
+        ) {
             return;
         }
+
+        $this->infos = [
+            'contentTypeGroupId' => $signal->contentTypeGroupId,
+            'contentTypeId' => $signal->contentTypeId,
+        ];
+
+        $this->auditService->log($this);
     }
 }

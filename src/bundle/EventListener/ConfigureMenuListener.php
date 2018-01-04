@@ -2,6 +2,7 @@
 
 namespace Edgar\EzUIAuditBundle\EventListener;
 
+use eZ\Publish\API\Repository\PermissionResolver;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use JMS\TranslationBundle\Model\Message;
@@ -14,16 +15,27 @@ class ConfigureMenuListener implements TranslationContainerInterface
     const ITEM_AUDIT_CONFIGURE = 'main__audit__configure';
     const ITEM_AUDIT_EXPORT = 'main__audit__export';
 
+    /** @var PermissionResolver  */
+    private $permissionResolver;
+
+    public function __construct(
+        PermissionResolver $permissionResolver
+    ) {
+        $this->permissionResolver = $permissionResolver;
+    }
+
     /**
      * @param ConfigureMenuEvent $event
      */
     public function onMenuConfigure(ConfigureMenuEvent $event)
     {
-        $menu = $event->getMenu();
+        if ($this->permissionResolver->hasAccess('uiaudit', 'audit')) {
+            $menu = $event->getMenu();
 
-        $auditMenu = $menu->addChild(self::ITEM_AUDIT, []);
+            $auditMenu = $menu->addChild(self::ITEM_AUDIT, []);
 
-        $this->addAuditMenuItems($auditMenu);
+            $this->addAuditMenuItems($auditMenu);
+        }
     }
 
     private function addAuditMenuItems(ItemInterface $auditMenu)
@@ -53,10 +65,9 @@ class ConfigureMenuListener implements TranslationContainerInterface
     {
         return [
             (new Message(self::ITEM_AUDIT, 'messages'))->setDesc('Audit'),
-            (new Message(self::ITEM_AUDIT, 'menu'))->setDesc('Audit'),
-            (new Message(self::ITEM_AUDIT_DASHBOARD, 'menu'))->setDesc('Dashboard'),
-            (new Message(self::ITEM_AUDIT_CONFIGURE, 'menu'))->setDesc('Configure'),
-            (new Message(self::ITEM_AUDIT_EXPORT, 'menu'))->setDesc('Export'),
+            (new Message(self::ITEM_AUDIT_DASHBOARD, 'messages'))->setDesc('Dashboard'),
+            (new Message(self::ITEM_AUDIT_CONFIGURE, 'messages'))->setDesc('Configure'),
+            (new Message(self::ITEM_AUDIT_EXPORT, 'messages'))->setDesc('Export'),
         ];
     }
 }

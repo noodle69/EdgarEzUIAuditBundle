@@ -9,8 +9,17 @@ class AssignSectionAudit extends AbstractAudit
 {
     public function receive(Signal $signal)
     {
-        if (!$signal instanceof Signal\SectionService\AssignSectionSignal) {
+        if (!$signal instanceof Signal\SectionService\AssignSectionSignal
+            || !$this->auditService->isConfigured(self::class)
+        ) {
             return;
         }
+
+        $this->infos = [
+            'contentId' => $signal->contentId,
+            'sectionId' => $signal->sectionId,
+        ];
+
+        $this->auditService->log($this);
     }
 }

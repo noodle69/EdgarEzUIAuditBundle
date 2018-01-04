@@ -9,8 +9,18 @@ class CreateLocationAudit extends AbstractAudit
 {
     public function receive(Signal $signal)
     {
-        if (!$signal instanceof Signal\LocationService\CreateLocationSignal) {
+        if (!$signal instanceof Signal\LocationService\CreateLocationSignal
+            || !$this->auditService->isConfigured(self::class)
+        ) {
             return;
         }
+
+        $this->infos = [
+            'contentId' => $signal->contentId,
+            'locationId' => $signal->locationId,
+            'parentLocationId' => $signal->parentLocationId,
+        ];
+
+        $this->auditService->log($this);
     }
 }

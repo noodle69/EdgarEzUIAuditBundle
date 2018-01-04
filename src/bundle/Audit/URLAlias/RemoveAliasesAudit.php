@@ -9,8 +9,15 @@ class RemoveAliasesAudit extends AbstractAudit
 {
     public function receive(Signal $signal)
     {
-        if (!$signal instanceof Signal\URLAliasService\RemoveAliasesSignal) {
+        if (!$signal instanceof Signal\URLAliasService\RemoveAliasesSignal
+            || !$this->auditService->isConfigured(self::class)
+        ) {
             return;
         }
+
+        $this->infos = [
+        ];
+
+        $this->auditService->log($this);
     }
 }

@@ -9,8 +9,17 @@ class AssignUserToUserGroupAudit extends AbstractAudit
 {
     public function receive(Signal $signal)
     {
-        if (!$signal instanceof Signal\UserService\AssignUserToUserGroupSignal) {
+        if (!$signal instanceof Signal\UserService\AssignUserToUserGroupSignal
+            || !$this->auditService->isConfigured(self::class)
+        ) {
             return;
         }
+
+        $this->infos = [
+            'userGroupId' => $signal->userGroupId,
+            'userId' => $signal->userId,
+        ];
+
+        $this->auditService->log($this);
     }
 }

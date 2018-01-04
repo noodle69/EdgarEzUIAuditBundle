@@ -9,8 +9,16 @@ class CreateUserAudit extends AbstractAudit
 {
     public function receive(Signal $signal)
     {
-        if (!$signal instanceof Signal\UserService\CreateUserSignal) {
+        if (!$signal instanceof Signal\UserService\CreateUserSignal
+            || !$this->auditService->isConfigured(self::class)
+        ) {
             return;
         }
+
+        $this->infos = [
+            'userId' => $signal->userId,
+        ];
+
+        $this->auditService->log($this);
     }
 }

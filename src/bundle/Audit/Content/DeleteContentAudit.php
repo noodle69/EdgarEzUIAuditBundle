@@ -9,8 +9,17 @@ class DeleteContentAudit extends AbstractAudit
 {
     public function receive(Signal $signal)
     {
-        if (!$signal instanceof Signal\ContentService\DeleteContentSignal) {
+        if (!$signal instanceof Signal\ContentService\DeleteContentSignal
+            || !$this->auditService->isConfigured(self::class)
+        ) {
             return;
         }
+
+        $this->infos = [
+            'contentId' => $signal->contentId,
+            'affectedLocationIds' => $signal->affectedLocationIds,
+        ];
+
+        $this->auditService->log($this);
     }
 }

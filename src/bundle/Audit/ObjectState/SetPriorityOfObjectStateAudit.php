@@ -9,8 +9,17 @@ class SetPriorityOfObjectStateAudit extends AbstractAudit
 {
     public function receive(Signal $signal)
     {
-        if (!$signal instanceof Signal\ObjectStateService\SetPriorityOfObjectStateSignal) {
+        if (!$signal instanceof Signal\ObjectStateService\SetPriorityOfObjectStateSignal
+            || !$this->auditService->isConfigured(self::class)
+        ) {
             return;
         }
+
+        $this->infos = [
+            'objectStateId' => $signal->objectStateId,
+            'priority' => $signal->priority,
+        ];
+
+        $this->auditService->log($this);
     }
 }

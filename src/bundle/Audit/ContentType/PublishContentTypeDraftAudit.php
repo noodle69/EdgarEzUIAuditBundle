@@ -9,8 +9,16 @@ class PublishContentTypeDraftAudit extends AbstractAudit
 {
     public function receive(Signal $signal)
     {
-        if (!$signal instanceof Signal\ContentTypeService\PublishContentTypeDraftSignal) {
+        if (!$signal instanceof Signal\ContentTypeService\PublishContentTypeDraftSignal
+            || !$this->auditService->isConfigured(self::class)
+        ) {
             return;
         }
+
+        $this->infos = [
+            'contentTypeDraftId' => $signal->contentTypeDraftId,
+        ];
+
+        $this->auditService->log($this);
     }
 }

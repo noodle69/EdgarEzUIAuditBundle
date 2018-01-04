@@ -18,7 +18,7 @@ class FilterAuditType extends AbstractType
                 [
                     'label' => false,
                     'multiple' => true,
-                    'expanded' => true,
+                    'expanded' => false,
                 ]
             )
             ->add('page', HiddenType::class)

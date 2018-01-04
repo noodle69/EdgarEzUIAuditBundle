@@ -9,8 +9,18 @@ class AssignRoleToUserGroupAudit extends AbstractAudit
 {
     public function receive(Signal $signal)
     {
-        if (!$signal instanceof Signal\RoleService\AssignRoleToUserGroupSignal) {
+        if (!$signal instanceof Signal\RoleService\AssignRoleToUserGroupSignal
+            || !$this->auditService->isConfigured(self::class)
+        ) {
             return;
         }
+
+        $this->infos = [
+            'roleId' => $signal->roleId,
+            'userGroupId' => $signal->userGroupId,
+            'roleLimitation identifier' => $signal->roleLimitation->getIdentifier(),
+        ];
+
+        $this->auditService->log($this);
     }
 }

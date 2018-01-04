@@ -9,8 +9,17 @@ class RemovePolicyAudit extends AbstractAudit
 {
     public function receive(Signal $signal)
     {
-        if (!$signal instanceof Signal\RoleService\RemovePolicySignal) {
+        if (!$signal instanceof Signal\RoleService\RemovePolicySignal
+            || !$this->auditService->isConfigured(self::class)
+        ) {
             return;
         }
+
+        $this->infos = [
+            'roleId' => $signal->roleId,
+            'policyId' => $signal->policyId,
+        ];
+
+        $this->auditService->log($this);
     }
 }

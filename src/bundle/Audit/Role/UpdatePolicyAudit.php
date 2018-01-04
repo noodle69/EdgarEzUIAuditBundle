@@ -9,8 +9,16 @@ class UpdatePolicyAudit extends AbstractAudit
 {
     public function receive(Signal $signal)
     {
-        if (!$signal instanceof Signal\RoleService\UpdatePolicySignal) {
+        if (!$signal instanceof Signal\RoleService\UpdatePolicySignal
+            || !$this->auditService->isConfigured(self::class)
+        ) {
             return;
         }
+
+        $this->infos = [
+            'policyId' => $signal->policyId,
+        ];
+
+        $this->auditService->log($this);
     }
 }

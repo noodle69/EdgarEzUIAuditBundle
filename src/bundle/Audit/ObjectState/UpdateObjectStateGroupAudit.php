@@ -9,8 +9,16 @@ class UpdateObjectStateGroupAudit extends AbstractAudit
 {
     public function receive(Signal $signal)
     {
-        if (!$signal instanceof Signal\ObjectStateService\UpdateObjectStateGroupSignal) {
+        if (!$signal instanceof Signal\ObjectStateService\UpdateObjectStateGroupSignal
+            || !$this->auditService->isConfigured(self::class)
+        ) {
             return;
         }
+
+        $this->infos = [
+            'objectStateGroupId' => $signal->objectStateGroupId,
+        ];
+
+        $this->auditService->log($this);
     }
 }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="c5497bca58468ae64aed6c0fd921109217988db3" resname="Events">
+        <source>Events</source>
+        <target>Events</target>
+        <note>key: Events</note>
+      </trans-unit>
+      <trans-unit id="18cbde25712ae77e32f04fd4979a6b80e6cd69e8" resname="breadcrumb.audit">
+        <source>Audit</source>
+        <target>Audit</target>
+        <note>key: breadcrumb.audit</note>
+      </trans-unit>
+      <trans-unit id="f971b677cc58cbe4ee4410cb27473c30e23332cd" resname="main__audit">
+        <source>Audit</source>
+        <target>Audit</target>
+        <note>key: main__audit</note>
+      </trans-unit>
+      <trans-unit id="22ca861e991543116222e22d4845808896856446" resname="main__audit__configure">
+        <source>Configure</source>
+        <target state="new">Configure</target>
+        <note>key: main__audit__configure</note>
+      </trans-unit>
+      <trans-unit id="0795f1d9a69b18937fcc42e4dde4f09b2bfc4c7a" resname="main__audit__dashboard">
+        <source>Dashboard</source>
+        <target state="new">Dashboard</target>
+        <note>key: main__audit__dashboard</note>
+      </trans-unit>
+      <trans-unit id="14235436ea1d1bfd40310c40ff0b9f116acab03b" resname="main__audit__export">
+        <source>Export</source>
+        <target state="new">Export</target>
+        <note>key: main__audit__export</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

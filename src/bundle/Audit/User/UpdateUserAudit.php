@@ -9,8 +9,16 @@ class UpdateUserAudit extends AbstractAudit
 {
     public function receive(Signal $signal)
     {
-        if (!$signal instanceof Signal\UserService\UpdateUserSignal) {
+        if (!$signal instanceof Signal\UserService\UpdateUserSignal
+            || !$this->auditService->isConfigured(self::class)
+        ) {
             return;
         }
+
+        $this->infos = [
+            'userId' => $signal->userId,
+        ];
+
+        $this->auditService->log($this);
     }
 }

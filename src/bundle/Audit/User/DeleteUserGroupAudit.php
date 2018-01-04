@@ -9,8 +9,17 @@ class DeleteUserGroupAudit extends AbstractAudit
 {
     public function receive(Signal $signal)
     {
-        if (!$signal instanceof Signal\UserService\DeleteUserGroupSignal) {
+        if (!$signal instanceof Signal\UserService\DeleteUserGroupSignal
+            || !$this->auditService->isConfigured(self::class)
+        ) {
             return;
         }
+
+        $this->infos = [
+            'userGroupId' => $signal->userGroupId,
+            'affectedLocationIds' => $signal->affectedLocationIds,
+        ];
+
+        $this->auditService->log($this);
     }
 }

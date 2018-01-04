@@ -9,8 +9,16 @@ class CreateContentTypeGroupAudit extends AbstractAudit
 {
     public function receive(Signal $signal)
     {
-        if (!$signal instanceof Signal\ContentTypeService\CreateContentTypeGroupSignal) {
+        if (!$signal instanceof Signal\ContentTypeService\CreateContentTypeGroupSignal
+            || !$this->auditService->isConfigured(self::class)
+        ) {
             return;
         }
+
+        $this->infos = [
+            'groupId' => $signal->groupId,
+        ];
+
+        $this->auditService->log($this);
     }
 }

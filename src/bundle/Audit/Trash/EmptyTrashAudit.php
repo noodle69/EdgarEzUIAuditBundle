@@ -9,8 +9,15 @@ class EmptyTrashAudit extends AbstractAudit
 {
     public function receive(Signal $signal)
     {
-        if (!$signal instanceof Signal\TrashService\EmptyTrashSignal) {
+        if (!$signal instanceof Signal\TrashService\EmptyTrashSignal
+            || !$this->auditService->isConfigured(self::class)
+        ) {
             return;
         }
+
+        $this->infos = [
+        ];
+
+        $this->auditService->log($this);
     }
 }

@@ -9,8 +9,16 @@ class UpdateSectionAudit extends AbstractAudit
 {
     public function receive(Signal $signal)
     {
-        if (!$signal instanceof Signal\SectionService\UpdateSectionSignal) {
+        if (!$signal instanceof Signal\SectionService\UpdateSectionSignal
+            || !$this->auditService->isConfigured(self::class)
+        ) {
             return;
         }
+
+        $this->infos = [
+            'sectionId' => $signal->sectionId,
+        ];
+
+        $this->auditService->log($this);
     }
 }

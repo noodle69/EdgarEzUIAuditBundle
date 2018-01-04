@@ -9,8 +9,16 @@ class CreateLanguageAudit extends AbstractAudit
 {
     public function receive(Signal $signal)
     {
-        if (!$signal instanceof Signal\LanguageService\CreateLanguageSignal) {
+        if (!$signal instanceof Signal\LanguageService\CreateLanguageSignal
+            || !$this->auditService->isConfigured(self::class)
+        ) {
             return;
         }
+
+        $this->infos = [
+            'languageId' => $signal->languageId,
+        ];
+
+        $this->auditService->log($this);
     }
 }

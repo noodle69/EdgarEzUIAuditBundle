@@ -1,0 +1,23 @@
+{% extends 'EzPlatformAdminUiBundle::layout.html.twig' %}
+
+{% trans_default_domain 'edgarezuiaudit' %}
+
+{% block body_class %}{% endblock %}
+
+{% block breadcrumbs %}
+    {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
+        { value: 'breadcrumb.audit'|trans(domain='messages')|desc('Audit') , },
+        { url: path('edgar.audit.export'), value: 'export.breadcrumb.view'|trans|desc('Export') },
+    ]} %}
+{% endblock %}
+
+{% block page_title %}
+    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+        title: 'export.view.title'|trans|desc('Audit export'),
+        iconName: 'history'
+    } %}
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}

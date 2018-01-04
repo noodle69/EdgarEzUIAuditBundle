@@ -9,8 +9,17 @@ class UpdateLanguageNameAudit extends AbstractAudit
 {
     public function receive(Signal $signal)
     {
-        if (!$signal instanceof Signal\LanguageService\UpdateLanguageNameSignal) {
+        if (!$signal instanceof Signal\LanguageService\UpdateLanguageNameSignal
+            || !$this->auditService->isConfigured(self::class)
+        ) {
             return;
         }
+
+        $this->infos = [
+            'languageId' => $signal->languageId,
+            'newName' => $signal->newName,
+        ];
+
+        $this->auditService->log($this);
     }
 }

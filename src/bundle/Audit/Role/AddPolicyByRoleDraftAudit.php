@@ -9,8 +9,17 @@ class AddPolicyByRoleDraftAudit extends AbstractAudit
 {
     public function receive(Signal $signal)
     {
-        if (!$signal instanceof Signal\RoleService\AddPolicyByRoleDraftSignal) {
+        if (!$signal instanceof Signal\RoleService\AddPolicyByRoleDraftSignal
+            || !$this->auditService->isConfigured(self::class)
+        ) {
             return;
         }
+
+        $this->infos = [
+            'roleId' => $signal->roleId,
+            'policyId' => $signal->policyId,
+        ];
+
+        $this->auditService->log($this);
     }
 }
