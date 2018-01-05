@@ -3,6 +3,7 @@
 namespace Edgar\EzUIAudit\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,9 +17,24 @@ class FilterAuditType extends AbstractType
                 'audit_types',
                 AuditTypeChoiceType::class,
                 [
-                    'label' => false,
+                    'label' => 'Signals',
                     'multiple' => true,
                     'expanded' => false,
+                    'required' => false,
+                ]
+            )
+            ->add(
+                'date_start',
+                DateType::class,
+                [
+                    'widget' => 'choice',
+                ]
+            )
+            ->add(
+                'date_end',
+                DateType::class,
+                [
+                    'widget' => 'choice',
                 ]
             )
             ->add('page', HiddenType::class)

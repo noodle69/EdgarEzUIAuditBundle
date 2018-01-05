@@ -2,7 +2,7 @@
 
 {% trans_default_domain 'edgarezuiaudit' %}
 
-{% block body_class %}{% endblock %}
+{% block body_class %}ez-info-view{% endblock %}
 
 {% block breadcrumbs %}
     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
@@ -19,5 +19,46 @@
 {% endblock %}
 
 {% block content %}
+    <section class="container mt-4">
 
+        <div class="ez-table-header mt-3">
+            <h5>{{ 'export.header'|trans({'%total%': pager.nbResults})|desc('Export results (%total%)') }}</h5>
+        </div>
+
+        {% if exports is empty %}
+            <table class="table">
+                <tr>
+                    <td colspan="4">
+                        <span>{{ 'export.no_result'|trans|desc('Sorry, no export were found.') }}</span>
+                    </td>
+                </tr>
+            </table>
+        {% else %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>{{ 'export.user_id'|trans|desc('User ID') }}</th>
+                    <th>{{ 'export.user_name'|trans|desc('User name') }}</th>
+                    <th>{{ 'export.criterias'|trans|desc('Criterias') }}</th>
+                    <th>{{ 'export.date'|trans|desc('Date') }}</th>
+                    <th>{{ 'export.status'|trans|desc('Status') }}</th>
+                    <th>{{ 'export.file'|trans|desc('File') }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for row in exports %}
+                    {% include '@EdgarEzUIAudit/audit/export/table_row.html.twig' with { row: row } %}
+                {% endfor %}
+                </tbody>
+            </table>
+            <div class="row justify-content-center align-items-center">
+                <h6>{{ 'search.viewing'|trans({'%viewing%': pager.currentPageResults|length, '%total%': pager.nbResults})|desc('Viewing %viewing% out of %total% sub-items') }}</h6>
+            </div>
+            {% if pager.haveToPaginate %}
+                <div class="row justify-content-center align-items-center">
+                    {{ pagerfanta(pager, 'ez') }}
+                </div>
+            {% endif %}
+        {% endif %}
+    </section>
 {% endblock %}

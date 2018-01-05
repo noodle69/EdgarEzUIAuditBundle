@@ -10,6 +10,8 @@ interface AuditInterface
 
     public function getInfos(): array;
 
+    public function getIdentifier(): string;
+
     public function getName(): string;
 
     public function getGroup(): string;

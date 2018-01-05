@@ -21,6 +21,8 @@ public function registerBundles()
 {
     $bundles = array(
         // ...
+        new Edgar\CronBundle\EdgarCronBundle(),
+        new Edgar\EzUICronBundle\EdgarEzUICronBundle(),
         new Edgar\EzUIAuditBundle\EdgarEzUIAuditBundle(),
         // ...
     );
@@ -48,6 +50,11 @@ php bin/console doctrine:schema:update --force
 Add to your global configuration app/config/routing.yml
 
 ```yaml
+edgar.ezuicron:
+    resource: '@EdgarEzUICronBundle/Resources/config/routing.yml'
+    defaults:
+        siteaccess_group_whitelist: 'admin_group'
+        
 edgar.ezuiaudit:
     resource: '@EdgarEzUIAuditBundle/Resources/config/routing.yml'
     defaults:

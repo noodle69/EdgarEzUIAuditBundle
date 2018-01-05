@@ -6,10 +6,10 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
-      <trans-unit id="c5497bca58468ae64aed6c0fd921109217988db3" resname="Events">
-        <source>Events</source>
-        <target>Events</target>
-        <note>key: Events</note>
+      <trans-unit id="2346a18ea3002ff04eca3a130c7f40e65c56f0c9" resname="Signals">
+        <source>Signals</source>
+        <target state="new">Signals</target>
+        <note>key: Signals</note>
       </trans-unit>
       <trans-unit id="18cbde25712ae77e32f04fd4979a6b80e6cd69e8" resname="breadcrumb.audit">
         <source>Audit</source>
@@ -23,17 +23,17 @@
       </trans-unit>
       <trans-unit id="22ca861e991543116222e22d4845808896856446" resname="main__audit__configure">
         <source>Configure</source>
-        <target state="new">Configure</target>
+        <target>Configure</target>
         <note>key: main__audit__configure</note>
       </trans-unit>
       <trans-unit id="0795f1d9a69b18937fcc42e4dde4f09b2bfc4c7a" resname="main__audit__dashboard">
         <source>Dashboard</source>
-        <target state="new">Dashboard</target>
+        <target>Dashboard</target>
         <note>key: main__audit__dashboard</note>
       </trans-unit>
       <trans-unit id="14235436ea1d1bfd40310c40ff0b9f116acab03b" resname="main__audit__export">
         <source>Export</source>
-        <target state="new">Export</target>
+        <target>Export</target>
         <note>key: main__audit__export</note>
       </trans-unit>
     </body>

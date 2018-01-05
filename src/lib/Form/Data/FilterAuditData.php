@@ -26,14 +26,24 @@ class FilterAuditData
      */
     private $audit_types;
 
+    /** @var \DateTime|null  */
+    private $date_start;
+
+    /** @var \DateTime|null  */
+    private $date_end;
+
     public function __construct(
         int $limit = 10,
         int $page = 1,
-        ?array $audit_types = []
+        ?array $audit_types = [],
+        ?\DateTime $date_start = null,
+        ?\DateTime $date_end = null
     ) {
         $this->limit = $limit;
         $this->page = $page;
         $this->audit_types = $audit_types;
+        $this->date_start = $date_start;
+        $this->date_end = $date_end;
     }
 
     /**
@@ -67,6 +77,18 @@ class FilterAuditData
         return $this;
     }
 
+    public function setDateStart(\DateTime $date_start): self
+    {
+        $this->date_start = $date_start;
+        return $this;
+    }
+
+    public function setDateEnd(\DateTime $date_end): self
+    {
+        $this->date_end = $date_end;
+        return $this;
+    }
+
     /**
      * @return int
      */
@@ -86,5 +108,15 @@ class FilterAuditData
     public function getAuditTypes(): ?array
     {
         return $this->audit_types;
+    }
+
+    public function getDateStart(): ?\DateTime
+    {
+        return $this->date_start;
+    }
+
+    public function getDateEnd(): ?\DateTime
+    {
+        return $this->date_end;
     }
 }

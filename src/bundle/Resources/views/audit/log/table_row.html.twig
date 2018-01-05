@@ -1,0 +1,14 @@
+<tr>
+    <td>{{ row.user_id }}</td>
+    <td>{{ row.user_name }}</td>
+    <td>{{ row.group_name }}</td>
+    <td>{{ row.audit_name }}</td>
+    <td>
+        <ul>
+            {% for key, value in row.infos %}
+                <li>{{ key }}: {{ value }}</li>
+            {% endfor %}
+        </ul>
+    </td>
+    <td>{{ row.date|date('M d, Y') }}</td>
+</tr>

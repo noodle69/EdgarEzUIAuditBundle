@@ -38,6 +38,13 @@ class EdgarEzAuditLog
     /**
      * @var string
      *
+     * @ORM\Column(name="audit_identifier", type="string", nullable=false)
+     */
+    private $auditIdentifier;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="audit_name", type="string", nullable=false)
      */
     private $auditName;
@@ -80,6 +87,12 @@ class EdgarEzAuditLog
         return $this;
     }
 
+    public function setAuditIdentifier(string $auditIdentifier): self
+    {
+        $this->auditIdentifier = $auditIdentifier;
+        return $this;
+    }
+
     public function setAuditName(string $auditName): self
     {
         $this->auditName = $auditName;
@@ -110,6 +123,11 @@ class EdgarEzAuditLog
     public function getGroupName(): string
     {
         return $this->groupName;
+    }
+
+    public function getAuditIdentifier(): string
+    {
+        return $this->auditIdentifier;
     }
 
     public function getAuditName(): string

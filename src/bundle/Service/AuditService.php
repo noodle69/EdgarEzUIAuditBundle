@@ -3,13 +3,17 @@
 namespace Edgar\EzUIAuditBundle\Service;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
+use Doctrine\ORM\QueryBuilder;
 use Edgar\EzUIAudit\Audit\AuditInterface;
 use Edgar\EzUIAudit\Form\Data\AuditData;
 use Edgar\EzUIAudit\Form\Data\ConfigureAuditData;
+use Edgar\EzUIAudit\Form\Data\FilterAuditData;
 use Edgar\EzUIAudit\Handler\AuditHandler;
 use Edgar\EzUIAudit\Repository\EdgarEzAuditConfigurationRepository;
+use Edgar\EzUIAudit\Repository\EdgarEzAuditExportRepository;
 use Edgar\EzUIAudit\Repository\EdgarEzAuditLogRepository;
 use Edgar\EzUIAuditBundle\Entity\EdgarEzAuditConfiguration;
+use Edgar\EzUIAuditBundle\Entity\EdgarEzAuditExport;
 use Edgar\EzUIAuditBundle\Entity\EdgarEzAuditLog;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
@@ -27,6 +31,9 @@ class AuditService
     /** @var EdgarEzAuditLogRepository  */
     protected $auditLog;
 
+    /** @var EdgarEzAuditExportRepository  */
+    protected $auditExport;
+
     public function __construct(
         AuditHandler $auditHandler,
         Registry $doctrineRegistry,
@@ -37,6 +44,7 @@ class AuditService
         $entityManager = $doctrineRegistry->getManager();
         $this->auditConfiguration = $entityManager->getRepository(EdgarEzAuditConfiguration::class);
         $this->auditLog = $entityManager->getRepository(EdgarEzAuditLog::class);
+        $this->auditExport = $entityManager->getRepository(EdgarEzAuditExport::class);
     }
 
     public function loadAuditTypeGroups(): array
@@ -116,6 +124,16 @@ class AuditService
         $user = $this->tokenStorage->getToken()->getUser();
         $apiUser = $user->getAPIUser();
 
-        $this->auditLog->log($apiUser->id, $audit->getGroup(), $audit->getName(), $audit->getInfos());
+        $this->auditLog->log($apiUser->id, $audit->getGroup(), $audit->getIdentifier(), $audit->getName(), $audit->getInfos());
+    }
+
+    public function buildLogQuery(FilterAuditData $data): QueryBuilder
+    {
+        return $this->auditLog->buildQuery($data);
+    }
+
+    public function buildExportQuery(): QueryBuilder
+    {
+        return $this->auditExport->buildQuery();
     }
 }

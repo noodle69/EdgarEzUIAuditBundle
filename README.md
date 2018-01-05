@@ -13,3 +13,5 @@ This bundle offers interface to configure and exploit information provided when 
 ## Documentation
 
 [Installation](docs/INSTALL.md)
+
+[Extend](docs/EXTEND.md)

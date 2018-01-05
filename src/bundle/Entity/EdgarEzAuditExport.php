@@ -33,7 +33,21 @@ class EdgarEzAuditExport
      *
      * @ORM\Column(name="criterias", type="array", nullable=false)
      */
-    private $criterias;
+    private $audits;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="date_start", type="integer", nullable=false)
+     */
+    private $dateStart;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="date_end", type="integer", nullable=false)
+     */
+    private $dateEnd;
 
     /**
      * @var \DateTime
@@ -67,9 +81,21 @@ class EdgarEzAuditExport
         return $this;
     }
 
-    public function setCriterias(array $criterias): self
+    public function setAudits(array $audits): self
     {
-        $this->criterias = $criterias;
+        $this->audits = $audits;
+        return $this;
+    }
+
+    public function setDateStart(int $dateStart): self
+    {
+        $this->dateStart = $dateStart;
+        return $this;
+    }
+
+    public function setDateEnd(int $dateEnd): self
+    {
+        $this->dateEnd = $dateEnd;
         return $this;
     }
 
@@ -94,9 +120,19 @@ class EdgarEzAuditExport
         return $this->date;
     }
 
-    public function getCriterias(): array
+    public function getAudits(): array
     {
-        return $this->criterias;
+        return $this->audits;
+    }
+
+    public function getDateStart(): int
+    {
+        return $this->dateStart;
+    }
+
+    public function getDateEnd(): int
+    {
+        return $this->dateEnd;
     }
 
     public function getStatus(): int

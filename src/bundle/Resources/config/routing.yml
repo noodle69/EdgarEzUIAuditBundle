@@ -1,14 +1,20 @@
 edgar.audit.dashboard:
     path: /audit/dashboard
     defaults:
-        _controller: 'EdgarEzUIAuditBundle:Audit:dashboard'
+        _controller: 'EdgarEzUIAuditBundle:AuditDashboard:dashboard'
 
 edgar.audit.configure:
     path: /audit/configure
     defaults:
-        _controller: 'EdgarEzUIAuditBundle:Audit:configure'
+        _controller: 'EdgarEzUIAuditBundle:AuditConfigure:configure'
 
 edgar.audit.export:
     path: /audit/export
     defaults:
-        _controller: 'EdgarEzUIAuditBundle:Audit:export'
+        _controller: 'EdgarEzUIAuditBundle:AuditExport:export'
+
+edgar.audit.export.ask:
+    path: /audit/export/ask
+    methods: ['POST']
+    defaults:
+        _controller: 'EdgarEzUIAuditBundle:AuditExport:askExport'

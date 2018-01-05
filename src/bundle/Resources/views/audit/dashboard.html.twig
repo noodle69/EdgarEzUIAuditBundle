@@ -1,8 +1,10 @@
 {% extends 'EzPlatformAdminUiBundle::layout.html.twig' %}
 
+{% form_theme form_filter_audit '@EzPlatformAdminUi/form_fields.html.twig'  %}
+
 {% trans_default_domain 'edgarezuiaudit' %}
 
-{% block body_class %}{% endblock %}
+{% block body_class %}ez-info-view{% endblock %}
 
 {% block breadcrumbs %}
     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
@@ -19,11 +21,101 @@
 {% endblock %}
 
 {% block content %}
+
     <section class="container mt-4">
         {{ form_start(form_filter_audit, { 'action': path('edgar.audit.dashboard') }) }}
+
             <div class="input-group">
                 {{ form_widget(form_filter_audit.audit_types) }}
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-primary">
+                    <svg class="ez-icon ez-icon-search-button">
+                        <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#search"></use>
+                    </svg>
+                    {{ 'dashboard.perform'|trans|desc('Search') }}</button>
+                </span>
             </div>
+
+            <br />
+            <table class="table ez-table--list">
+                <thead>
+                    <tr>
+                        <th colspan="2">{{ 'Additional filters'|trans }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            {{ form_label(form_filter_audit.date_start) }}
+                        </td>
+                        <td>
+                            {{ form_widget(form_filter_audit.date_start) }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{ form_label(form_filter_audit.date_end) }}
+                        </td>
+                        <td>
+                            {{ form_widget(form_filter_audit.date_end) }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         {{ form_end(form_filter_audit) }}
+
+        {% if results is defined %}
+            {{ form_start(form_export_audit, { 'action': path('edgar.audit.export.ask') }) }}
+                {{ form_row(form_export_audit.audit_types) }}
+                {{ form_row(form_export_audit.date_start, { hidden: 'hidden' }) }}
+                {{ form_row(form_export_audit.date_end, { hidden: 'hidden' }) }}
+                <div class="ez-table-header mt-3">
+                    <h5>{{ 'search.header'|trans({'%total%': pager.nbResults})|desc('Search results (%total%)') }}</h5>
+                    {% if results is not empty %}
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-primary">
+                            {{ 'export.perform'|trans|desc('Ask for an export') }}</button>
+                        </span>
+                    {% endif %}
+                </div>
+
+                {% if results is empty %}
+                    <table class="table">
+                        <tr>
+                            <td colspan="4">
+                                <span>{{ 'search.no_result'|trans|desc('Sorry, no results were found.') }}</span>
+                            </td>
+                        </tr>
+                    </table>
+                {% else %}
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>{{ 'log.user_id'|trans|desc('User ID') }}</th>
+                            <th>{{ 'log.user_name'|trans|desc('User name') }}</th>
+                            <th>{{ 'log.group_name'|trans|desc('Group name') }}</th>
+                            <th>{{ 'log.audit_name'|trans|desc('Audit name') }}</th>
+                            <th>{{ 'log.infos'|trans|desc('Infos') }}</th>
+                            <th>{{ 'log.date'|trans|desc('Date') }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for row in results %}
+                            {% include '@EdgarEzUIAudit/audit/log/table_row.html.twig' with { row: row } %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="row justify-content-center align-items-center">
+                        <h6>{{ 'search.viewing'|trans({'%viewing%': pager.currentPageResults|length, '%total%': pager.nbResults})|desc('Viewing %viewing% out of %total% sub-items') }}</h6>
+                    </div>
+                    {% if pager.haveToPaginate %}
+                        <div class="row justify-content-center align-items-center">
+                            {{ pagerfanta(pager, 'ez') }}
+                        </div>
+                    {% endif %}
+                {% endif %}
+            {{ form_end(form_export_audit) }}
+        {% endif %}
     </section>
+
 {% endblock %}
