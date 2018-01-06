@@ -8,7 +8,7 @@
     <body>
       <trans-unit id="2346a18ea3002ff04eca3a130c7f40e65c56f0c9" resname="Signals">
         <source>Signals</source>
-        <target state="new">Signals</target>
+        <target>Signals</target>
         <note>key: Signals</note>
       </trans-unit>
       <trans-unit id="18cbde25712ae77e32f04fd4979a6b80e6cd69e8" resname="breadcrumb.audit">

@@ -8,8 +8,28 @@
     <body>
       <trans-unit id="f6bd942eba8f8d221ec96c1cf4f094e7abb9094f" resname="Additional filters">
         <source>Additional filters</source>
-        <target state="new">Additional filters</target>
+        <target>Additional filters</target>
         <note>key: Additional filters</note>
+      </trans-unit>
+      <trans-unit id="b6bd42e4e7302e5e9a15930c8fcdb73fc2c0cf18" resname="In progress">
+        <source>In progress</source>
+        <target state="new">In progress</target>
+        <note>key: In progress</note>
+      </trans-unit>
+      <trans-unit id="19682bdb9185a5fa9d763d414d0443d3a0bc2456" resname="Init">
+        <source>Init</source>
+        <target state="new">Init</target>
+        <note>key: Init</note>
+      </trans-unit>
+      <trans-unit id="da9fb11eb79b77d85eb6763bb0f2948c1609e37b" resname="KO">
+        <source>KO</source>
+        <target state="new">KO</target>
+        <note>key: KO</note>
+      </trans-unit>
+      <trans-unit id="9ce3bd4224c8c1780db56b4125ecf3f24bf748b7" resname="OK">
+        <source>OK</source>
+        <target state="new">OK</target>
+        <note>key: OK</note>
       </trans-unit>
       <trans-unit id="9d53c02e11d475d602c8a305ae8bc8f4954c29d5" resname="configure.breadcrumb.view">
         <source>Configuration</source>
@@ -33,7 +53,7 @@
       </trans-unit>
       <trans-unit id="9c81eb119d053e37dc2e2d30058b4f66134eb6a8" resname="dashboard.perform">
         <source>Search</source>
-        <target state="new">Search</target>
+        <target>Search</target>
         <note>key: dashboard.perform</note>
       </trans-unit>
       <trans-unit id="1bf5ad5c9ffd78f35f7de61e7e7d43b8443b4039" resname="dashboard.view.title">
@@ -51,54 +71,64 @@
         <target>You are not authorized to access this content</target>
         <note>key: edgar.ezuiaudit.permission.failed</note>
       </trans-unit>
+      <trans-unit id="6a980b955618482558f869ea897961c8438b3747" resname="export.audits">
+        <source>Audits</source>
+        <target state="new">Audits</target>
+        <note>key: export.audits</note>
+      </trans-unit>
       <trans-unit id="87612c420c5fa55d80affb05c55a0afb46ca2c73" resname="export.breadcrumb.view">
         <source>Export</source>
         <target>Export</target>
         <note>key: export.breadcrumb.view</note>
       </trans-unit>
-      <trans-unit id="b2fa345580c8c62a73b6c276bed258ea8cd248ee" resname="export.criterias">
-        <source>Criterias</source>
-        <target state="new">Criterias</target>
-        <note>key: export.criterias</note>
-      </trans-unit>
       <trans-unit id="9e3c6387b0b8d4dc57303181599a51e97f081bf6" resname="export.date">
         <source>Date</source>
-        <target state="new">Date</target>
+        <target>Date</target>
         <note>key: export.date</note>
+      </trans-unit>
+      <trans-unit id="3d374aa6373a3ca22bc3a96a8d9f548dcd85c1f5" resname="export.date_end">
+        <source>Date end</source>
+        <target state="new">Date end</target>
+        <note>key: export.date_end</note>
+      </trans-unit>
+      <trans-unit id="9f4fb5234658cf8e75b1f931e96087a00df68da3" resname="export.date_start">
+        <source>Date start</source>
+        <target state="new">Date start</target>
+        <note>key: export.date_start</note>
       </trans-unit>
       <trans-unit id="6a180561030acffd4edd95550c2ee79ad3c7f394" resname="export.file">
         <source>File</source>
-        <target state="new">File</target>
+        <target>File</target>
         <note>key: export.file</note>
       </trans-unit>
       <trans-unit id="0cba43dd0934baee7d01cca113580f1ebc3590e8" resname="export.header">
         <source>Export results (%total%)</source>
-        <target state="new">Export results (%total%)</target>
+        <target>Export results (%total%)</target>
         <note>key: export.header</note>
       </trans-unit>
       <trans-unit id="5a3964bdd21056624f6b23df64abc76d71c24e2c" resname="export.no_result">
         <source>Sorry, no export were found.</source>
-        <target state="new">Sorry, no export were found.</target>
+        <target>Sorry, no export were found.</target>
         <note>key: export.no_result</note>
       </trans-unit>
       <trans-unit id="ff098f1779c20e607b924319d3f5b84f84a3af10" resname="export.perform">
         <source>Ask for an export</source>
-        <target state="new">Ask for an export</target>
+        <target>Ask for an export</target>
         <note>key: export.perform</note>
       </trans-unit>
       <trans-unit id="4ddc4b3a25e50957dfbe1343505b83b468f65ac2" resname="export.status">
         <source>Status</source>
-        <target state="new">Status</target>
+        <target>Status</target>
         <note>key: export.status</note>
       </trans-unit>
       <trans-unit id="17b3dbdc5fd36d54e923e7a41a45cab2de71065b" resname="export.user_id">
         <source>User ID</source>
-        <target state="new">User ID</target>
+        <target>User ID</target>
         <note>key: export.user_id</note>
       </trans-unit>
       <trans-unit id="47392ded202abae5c0c1613a30110293f0029319" resname="export.user_name">
         <source>User name</source>
-        <target state="new">User name</target>
+        <target>User name</target>
         <note>key: export.user_name</note>
       </trans-unit>
       <trans-unit id="e48274a5e83400b75cff0478a80b93a48aace58f" resname="export.view.title">
@@ -108,47 +138,47 @@
       </trans-unit>
       <trans-unit id="4f714bf75f73fb745e79699eaf8956969ffedfb7" resname="log.audit_name">
         <source>Audit name</source>
-        <target state="new">Audit name</target>
+        <target>Audit name</target>
         <note>key: log.audit_name</note>
       </trans-unit>
       <trans-unit id="ecf1457f8721d862f253d338ef9016fc1bd418bf" resname="log.date">
         <source>Date</source>
-        <target state="new">Date</target>
+        <target>Date</target>
         <note>key: log.date</note>
       </trans-unit>
       <trans-unit id="6271c062ccd6a232c8569b0c8e4412f88b6ba3ec" resname="log.group_name">
         <source>Group name</source>
-        <target state="new">Group name</target>
+        <target>Group name</target>
         <note>key: log.group_name</note>
       </trans-unit>
       <trans-unit id="ad04dc31bed9f6ae309fa71fbeab28ab16072c94" resname="log.infos">
         <source>Infos</source>
-        <target state="new">Infos</target>
+        <target>Infos</target>
         <note>key: log.infos</note>
       </trans-unit>
       <trans-unit id="d00b11cd2688b4649760bb4297ad914af8c67ac5" resname="log.user_id">
         <source>User ID</source>
-        <target state="new">User ID</target>
+        <target>User ID</target>
         <note>key: log.user_id</note>
       </trans-unit>
       <trans-unit id="be9edb70cd46810849a836bf52d5a53a3024e325" resname="log.user_name">
         <source>User name</source>
-        <target state="new">User name</target>
+        <target>User name</target>
         <note>key: log.user_name</note>
       </trans-unit>
       <trans-unit id="0ec8148d681b43e87a6d0751fff188517be1ea26" resname="search.header">
         <source>Search results (%total%)</source>
-        <target state="new">Search results (%total%)</target>
+        <target>Search results (%total%)</target>
         <note>key: search.header</note>
       </trans-unit>
       <trans-unit id="8c11cc36acf58db9ff898f3a4cf02fd0fc293f67" resname="search.no_result">
         <source>Sorry, no results were found.</source>
-        <target state="new">Sorry, no results were found.</target>
+        <target>Sorry, no results were found.</target>
         <note>key: search.no_result</note>
       </trans-unit>
       <trans-unit id="fe647ff0e12d67501403559464217be468dba3d8" resname="search.viewing">
         <source>Viewing %viewing% out of %total% sub-items</source>
-        <target state="new">Viewing %viewing% out of %total% sub-items</target>
+        <target>Viewing %viewing% out of %total% sub-items</target>
         <note>key: search.viewing</note>
       </trans-unit>
     </body>

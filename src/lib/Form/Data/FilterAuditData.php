@@ -54,7 +54,6 @@ class FilterAuditData
     public function setLimit(int $limit): self
     {
         $this->limit = $limit;
-
         return $this;
     }
 
@@ -66,7 +65,6 @@ class FilterAuditData
     public function setPage(int $page): self
     {
         $this->page = $page;
-
         return $this;
     }
 

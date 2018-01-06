@@ -73,6 +73,7 @@ class AuditDashboardController extends BaseController
             new FilterAuditData()
         );
         $filterAuditType->handleRequest($request);
+        $filterAuditType->getData()->setPage($request->get('page', 1));
 
         if ($filterAuditType->isSubmitted()) {
             $result = $this->submitHandler->handle($filterAuditType, function (FilterAuditData $data) use ($filterAuditType) {
