@@ -11,7 +11,6 @@ use Edgar\EzUIAudit\Form\SubmitHandler;
 use Edgar\EzUIAuditBundle\Service\AuditService;
 use eZ\Publish\API\Repository\PermissionResolver;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
-use EzSystems\EzPlatformAdminUiBundle\Controller\Controller;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -19,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class AuditDashboardController extends Controller
+class AuditDashboardController extends BaseController
 {
     /** @var FormFactory  */
     protected $formFactory;
@@ -55,6 +54,7 @@ class AuditDashboardController extends Controller
         TranslatorInterface $translator,
         PagerContentToLogMapper $pagerContentToLogMapper
     ) {
+        parent::__construct($auditService, $permissionResolver, $notificationHandler, $translator);
         $this->formFactory = $formFactory;
         $this->exportFormFactory = $exportFormFactory;
         $this->submitHandler = $submitHandler;
@@ -67,16 +67,7 @@ class AuditDashboardController extends Controller
 
     public function dashboardAction(Request $request): Response
     {
-        if (!$this->permissionResolver->hasAccess('uiaudit', 'bookmark')) {
-            $this->notificationHandler->error(
-                $this->translator->trans(
-                    'edgar.ezuiaudit.permission.failed',
-                    [],
-                    'edgarezuiaudit'
-                )
-            );
-            return new RedirectResponse($this->generateUrl('ezplatform.dashboard', []));
-        }
+        $this->permissionAccess('uiaudit', 'bookmark');
 
         $filterAuditType = $this->formFactory->filterAudit(
             new FilterAuditData()

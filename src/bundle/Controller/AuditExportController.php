@@ -2,11 +2,13 @@
 
 namespace Edgar\EzUIAuditBundle\Controller;
 
+use Edgar\EzUIAudit\Form\Data\ExportAuditData;
+use Edgar\EzUIAudit\Form\Factory\ExportFormFactory;
 use Edgar\EzUIAudit\Form\Mapper\PagerContentToExportMapper;
+use Edgar\EzUIAudit\Form\SubmitHandler;
 use Edgar\EzUIAuditBundle\Service\AuditService;
 use eZ\Publish\API\Repository\PermissionResolver;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
-use EzSystems\EzPlatformAdminUiBundle\Controller\Controller;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -14,49 +16,39 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class AuditExportController extends Controller
+class AuditExportController extends BaseController
 {
-    /** @var AuditService  */
-    protected $auditService;
-
-    /** @var PermissionResolver  */
-    protected $permissionResolver;
-
-    /** @var NotificationHandlerInterface  */
-    protected $notificationHandler;
-
-    /** @var TranslatorInterface  */
-    protected $translator;
-
     /** @var PagerContentToExportMapper  */
     protected $pagerContentToExportMapper;
+
+    /** @var ExportFormFactory  */
+    protected $exportFormFactory;
+
+    /** @var SubmitHandler  */
+    protected $submitHandler;
 
     public function __construct(
         AuditService $auditService,
         PermissionResolver $permissionResolver,
         NotificationHandlerInterface $notificationHandler,
         TranslatorInterface $translator,
-        PagerContentToExportMapper $pagerContentToExportMapper
+        PagerContentToExportMapper $pagerContentToExportMapper,
+        ExportFormFactory $exportFormFactory,
+        SubmitHandler $submitHandler
     ) {
+        parent::__construct($auditService, $permissionResolver, $notificationHandler, $translator);
         $this->auditService = $auditService;
         $this->permissionResolver = $permissionResolver;
         $this->notificationHandler = $notificationHandler;
         $this->translator = $translator;
         $this->pagerContentToExportMapper = $pagerContentToExportMapper;
+        $this->exportFormFactory = $exportFormFactory;
+        $this->submitHandler = $submitHandler;
     }
 
     public function exportAction(Request $request): Response
     {
-        if (!$this->permissionResolver->hasAccess('uiaudit', 'export')) {
-            $this->notificationHandler->error(
-                $this->translator->trans(
-                    'edgar.ezuiaudit.permission.failed',
-                    [],
-                    'edgarezuiaudit'
-                )
-            );
-            return new RedirectResponse($this->generateUrl('ezplatform.dashboard', []));
-        }
+        $this->permissionAccess('uiaudit', 'export');
 
         $limit = $request->get('limit', 10);
         $page = $request->get('page', 1);
@@ -75,17 +67,25 @@ class AuditExportController extends Controller
         ]);
     }
 
-    public function askExport(Request $request): Response
+    public function askExportAction(Request $request): Response
     {
-        if (!$this->permissionResolver->hasAccess('uiaudit', 'export')) {
-            $this->notificationHandler->error(
-                $this->translator->trans(
-                    'edgar.ezuiaudit.permission.failed',
-                    [],
-                    'edgarezuiaudit'
-                )
-            );
-            return new RedirectResponse($this->generateUrl('ezplatform.dashboard', []));
+        $this->permissionAccess('uiaudit', 'export');
+
+        $exportAuditType = $this->exportFormFactory->exportAudit(
+            new ExportAuditData()
+        );
+        $exportAuditType->handleRequest($request);
+
+        if ($exportAuditType->isSubmitted()) {
+            $result = $this->submitHandler->handle($exportAuditType, function (ExportAuditData $data) use ($exportAuditType) {
+                $this->auditService->saveExport($data);
+
+                return new RedirectResponse($this->generateUrl('edgar.audit.export', []));
+            });
+
+            if ($result instanceof Response) {
+                return $result;
+            }
         }
 
         return new RedirectResponse($this->generateUrl('edgar.audit.export', []));

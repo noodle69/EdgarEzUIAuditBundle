@@ -13,12 +13,15 @@ services:
         public: true
 
     Edgar\EzUIAuditBundle\Cron\AuditExportCron:
+        arguments:
+            $storageDir: "%ezsettings.default.storage_dir%"
+            $varDir: "%ezsettings.default.var_dir%"
         tags:
-          - { name: "edgar.cron", alias: "audit_export", priority: 100, expression: "*/5 * * * *" }
+            - { name: "edgar.cron", alias: "audit_export", priority: 100, expression: "*/5 * * * *" }
 
     Edgar\EzUIAuditBundle\EventListener\ConfigureMenuListener:
         public: true
         tags:
-          - { name: kernel.event_listener, event: ezplatform_admin_ui.menu_configure.main_menu, method: onMenuConfigure }
+            - { name: kernel.event_listener, event: ezplatform_admin_ui.menu_configure.main_menu, method: onMenuConfigure }
 
     Edgar\EzUIAudit\Form\Type\AuditTypeChoiceType: ~

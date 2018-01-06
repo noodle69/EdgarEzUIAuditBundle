@@ -4,6 +4,7 @@ namespace Edgar\EzUIAudit\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use Edgar\EzUIAudit\Form\Data\AuditData;
 use Edgar\EzUIAudit\Form\Data\FilterAuditData;
 use Edgar\EzUIAuditBundle\Entity\EdgarEzAuditLog;
 
@@ -34,7 +35,9 @@ class EdgarEzAuditLogRepository extends EntityRepository
 
         if ($data->getAuditTypes() && count($data->getAuditTypes())) {
             $auditIdentifiers = [];
-            foreach ($data->getAuditTypes() as $auditType) {
+            /** @var AuditData[] $auditTypes */
+            $auditTypes = $data->getAuditTypes();
+            foreach ($auditTypes as $auditType) {
                 $auditIdentifiers[] = $auditType->getIdentifier();
             }
             $qbFilterAudit = $entityManager->createQueryBuilder();

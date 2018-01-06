@@ -7,6 +7,7 @@ use Doctrine\ORM\QueryBuilder;
 use Edgar\EzUIAudit\Audit\AuditInterface;
 use Edgar\EzUIAudit\Form\Data\AuditData;
 use Edgar\EzUIAudit\Form\Data\ConfigureAuditData;
+use Edgar\EzUIAudit\Form\Data\ExportAuditData;
 use Edgar\EzUIAudit\Form\Data\FilterAuditData;
 use Edgar\EzUIAudit\Handler\AuditHandler;
 use Edgar\EzUIAudit\Repository\EdgarEzAuditConfigurationRepository;
@@ -64,9 +65,10 @@ class AuditService
             $classInfos = explode('\\', get_class($audit));
             $classIdentifier = $classInfos[count($classInfos) - 1];
             $className = str_replace('Audit', '', $classIdentifier);
+            $groupName = $classInfos[count($classInfos) - 2];
 
             $auditData = new AuditData();
-            $auditData->setIdentifier($classIdentifier);
+            $auditData->setIdentifier($groupName . '/' . $classIdentifier);
             $auditData->setName(preg_replace('/(?<!^)([A-Z])/', ' \\1', $className));
             $return[] = $auditData;
         }
@@ -110,8 +112,9 @@ class AuditService
 
         $classInfos = explode('\\', $classPath);
         $className = $classInfos[count($classInfos) - 1];
+        $groupName = $classInfos[count($classInfos) - 2];;
         foreach ($audits as $audit) {
-            if ($audit->getIdentifier() == $className) {
+            if ($audit->getIdentifier() == $groupName . '/' . $className) {
                 return true;
             }
         }
@@ -135,5 +138,13 @@ class AuditService
     public function buildExportQuery(): QueryBuilder
     {
         return $this->auditExport->buildQuery();
+    }
+
+    public function saveExport(ExportAuditData $data)
+    {
+        $user = $this->tokenStorage->getToken()->getUser();
+        $apiUser = $user->getAPIUser();
+
+        $this->auditExport->save($data, $apiUser->id);
     }
 }

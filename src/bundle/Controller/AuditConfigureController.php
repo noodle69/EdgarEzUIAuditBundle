@@ -8,31 +8,18 @@ use Edgar\EzUIAudit\Form\SubmitHandler;
 use Edgar\EzUIAuditBundle\Service\AuditService;
 use eZ\Publish\API\Repository\PermissionResolver;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
-use EzSystems\EzPlatformAdminUiBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class AuditConfigureController extends Controller
+class AuditConfigureController extends BaseController
 {
     /** @var ConfigureFormFactory  */
     protected $configureFormFactory;
 
     /** @var SubmitHandler  */
     protected $submitHandler;
-
-    /** @var AuditService  */
-    protected $auditService;
-
-    /** @var PermissionResolver  */
-    protected $permissionResolver;
-
-    /** @var NotificationHandlerInterface  */
-    protected $notificationHandler;
-
-    /** @var TranslatorInterface  */
-    protected $translator;
 
     public function __construct(
         ConfigureFormFactory $configureFormFactory,
@@ -42,6 +29,7 @@ class AuditConfigureController extends Controller
         NotificationHandlerInterface $notificationHandler,
         TranslatorInterface $translator
     ) {
+        parent::__construct($auditService, $permissionResolver, $notificationHandler, $translator);
         $this->configureFormFactory = $configureFormFactory;
         $this->submitHandler = $submitHandler;
         $this->auditService = $auditService;
@@ -52,16 +40,7 @@ class AuditConfigureController extends Controller
 
     public function configureAction(Request $request): Response
     {
-        if (!$this->permissionResolver->hasAccess('uiaudit', 'configure')) {
-            $this->notificationHandler->error(
-                $this->translator->trans(
-                    'edgar.ezuiaudit.permission.failed',
-                    [],
-                    'edgarezuiaudit'
-                )
-            );
-            return new RedirectResponse($this->generateUrl('ezplatform.dashboard', []));
-        }
+        $this->permissionAccess('uiaudit', 'configure');
 
         $configureAuditType = $this->configureFormFactory->configureAudit(
             $this->auditService->getAuditConfiguration()

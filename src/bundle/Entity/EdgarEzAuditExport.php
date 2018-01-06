@@ -31,21 +31,21 @@ class EdgarEzAuditExport
     /**
      * @var array
      *
-     * @ORM\Column(name="criterias", type="array", nullable=false)
+     * @ORM\Column(name="audits", type="array", nullable=false)
      */
     private $audits;
 
     /**
-     * @var int
+     * @var \DateTime
      *
-     * @ORM\Column(name="date_start", type="integer", nullable=false)
+     * @ORM\Column(name="date_start", type="datetime", nullable=false)
      */
     private $dateStart;
 
     /**
-     * @var int
+     * @var \DateTime
      *
-     * @ORM\Column(name="date_end", type="integer", nullable=false)
+     * @ORM\Column(name="date_end", type="datetime", nullable=false)
      */
     private $dateEnd;
 
@@ -62,6 +62,13 @@ class EdgarEzAuditExport
      * @ORM\Column(name="status", type="integer", nullable=false)
      */
     private $status;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="file", type="string", nullable=true)
+     */
+    private $file;
 
     public function setId(int $id): self
     {
@@ -87,13 +94,13 @@ class EdgarEzAuditExport
         return $this;
     }
 
-    public function setDateStart(int $dateStart): self
+    public function setDateStart(\DateTime $dateStart): self
     {
         $this->dateStart = $dateStart;
         return $this;
     }
 
-    public function setDateEnd(int $dateEnd): self
+    public function setDateEnd(\DateTime $dateEnd): self
     {
         $this->dateEnd = $dateEnd;
         return $this;
@@ -102,6 +109,12 @@ class EdgarEzAuditExport
     public function setStatus(int $status): self
     {
         $this->status = $status;
+        return $this;
+    }
+
+    public function setFile(?string $file): self
+    {
+        $this->file = $file;
         return $this;
     }
 
@@ -125,12 +138,12 @@ class EdgarEzAuditExport
         return $this->audits;
     }
 
-    public function getDateStart(): int
+    public function getDateStart(): \DateTime
     {
         return $this->dateStart;
     }
 
-    public function getDateEnd(): int
+    public function getDateEnd(): \DateTime
     {
         return $this->dateEnd;
     }
@@ -138,5 +151,10 @@ class EdgarEzAuditExport
     public function getStatus(): int
     {
         return $this->status;
+    }
+
+    public function getFile(): ?string
+    {
+        return $this->file;
     }
 }

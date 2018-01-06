@@ -28,6 +28,12 @@ class AuditData
         return $this->identifier;
     }
 
+    public function getGroupName(): string
+    {
+        $identifier = explode('/', $this->identifier);
+        return $identifier[0];
+    }
+
     /**
      * @param string $name
      * @return AuditData

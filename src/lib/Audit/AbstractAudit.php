@@ -22,7 +22,7 @@ abstract class AbstractAudit extends Slot implements AuditInterface
     public function getIdentifier(): string
     {
         $classInfos = explode('\\', get_class($this));
-        return $classInfos[count($classInfos) - 1];
+        return $classInfos[count($classInfos) - 2] . '/' . $classInfos[count($classInfos) - 1];
     }
 
     public function getName(): string
