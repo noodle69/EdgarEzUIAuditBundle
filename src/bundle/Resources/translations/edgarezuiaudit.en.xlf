@@ -13,22 +13,22 @@
       </trans-unit>
       <trans-unit id="b6bd42e4e7302e5e9a15930c8fcdb73fc2c0cf18" resname="In progress">
         <source>In progress</source>
-        <target state="new">In progress</target>
+        <target>In progress</target>
         <note>key: In progress</note>
       </trans-unit>
       <trans-unit id="19682bdb9185a5fa9d763d414d0443d3a0bc2456" resname="Init">
         <source>Init</source>
-        <target state="new">Init</target>
+        <target>Init</target>
         <note>key: Init</note>
       </trans-unit>
       <trans-unit id="da9fb11eb79b77d85eb6763bb0f2948c1609e37b" resname="KO">
         <source>KO</source>
-        <target state="new">KO</target>
+        <target>KO</target>
         <note>key: KO</note>
       </trans-unit>
       <trans-unit id="9ce3bd4224c8c1780db56b4125ecf3f24bf748b7" resname="OK">
         <source>OK</source>
-        <target state="new">OK</target>
+        <target>OK</target>
         <note>key: OK</note>
       </trans-unit>
       <trans-unit id="9d53c02e11d475d602c8a305ae8bc8f4954c29d5" resname="configure.breadcrumb.view">
@@ -61,6 +61,11 @@
         <target>Audit dashboard</target>
         <note>key: dashboard.view.title</note>
       </trans-unit>
+      <trans-unit id="a4ed70a2d1277d97b3ea281260fd9c420e9cff6d" resname="edgar.ezuiaudit.configure.error %message%">
+        <source>edgar.ezuiaudit.configure.error %message%</source>
+        <target state="new">Fail to configure audits: %message%</target>
+        <note>key: edgar.ezuiaudit.configure.error %message%</note>
+      </trans-unit>
       <trans-unit id="ad496e38ff56de0c21a0f9a85f24ffd779b8a53a" resname="edgar.ezuiaudit.configure.updated">
         <source>Audit configuration updated successfully</source>
         <target>Audit configuration updated successfully</target>
@@ -70,11 +75,6 @@
         <source>You are not authorized to access this content</source>
         <target>You are not authorized to access this content</target>
         <note>key: edgar.ezuiaudit.permission.failed</note>
-      </trans-unit>
-      <trans-unit id="6a980b955618482558f869ea897961c8438b3747" resname="export.audits">
-        <source>Audits</source>
-        <target state="new">Audits</target>
-        <note>key: export.audits</note>
       </trans-unit>
       <trans-unit id="87612c420c5fa55d80affb05c55a0afb46ca2c73" resname="export.breadcrumb.view">
         <source>Export</source>
@@ -88,12 +88,12 @@
       </trans-unit>
       <trans-unit id="3d374aa6373a3ca22bc3a96a8d9f548dcd85c1f5" resname="export.date_end">
         <source>Date end</source>
-        <target state="new">Date end</target>
+        <target>Date end</target>
         <note>key: export.date_end</note>
       </trans-unit>
       <trans-unit id="9f4fb5234658cf8e75b1f931e96087a00df68da3" resname="export.date_start">
         <source>Date start</source>
-        <target state="new">Date start</target>
+        <target>Date start</target>
         <note>key: export.date_start</note>
       </trans-unit>
       <trans-unit id="6a180561030acffd4edd95550c2ee79ad3c7f394" resname="export.file">

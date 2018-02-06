@@ -16,6 +16,11 @@
         <target>Audit</target>
         <note>key: breadcrumb.audit</note>
       </trans-unit>
+      <trans-unit id="6a980b955618482558f869ea897961c8438b3747" resname="export.audits">
+        <source>Audits</source>
+        <target state="new">Audits</target>
+        <note>key: export.audits</note>
+      </trans-unit>
       <trans-unit id="f971b677cc58cbe4ee4410cb27473c30e23332cd" resname="main__audit">
         <source>Audit</source>
         <target>Audit</target>
