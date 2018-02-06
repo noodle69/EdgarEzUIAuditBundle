@@ -26,10 +26,10 @@ class FilterAuditData
      */
     private $audit_types;
 
-    /** @var \DateTime|null  */
+    /** @var \DateTime|null */
     private $date_start;
 
-    /** @var \DateTime|null  */
+    /** @var \DateTime|null */
     private $date_end;
 
     public function __construct(
@@ -54,6 +54,7 @@ class FilterAuditData
     public function setLimit(int $limit): self
     {
         $this->limit = $limit;
+
         return $this;
     }
 
@@ -65,6 +66,7 @@ class FilterAuditData
     public function setPage(int $page): self
     {
         $this->page = $page;
+
         return $this;
     }
 
@@ -78,12 +80,14 @@ class FilterAuditData
     public function setDateStart(\DateTime $date_start): self
     {
         $this->date_start = $date_start;
+
         return $this;
     }
 
     public function setDateEnd(\DateTime $date_end): self
     {
         $this->date_end = $date_end;
+
         return $this;
     }
 

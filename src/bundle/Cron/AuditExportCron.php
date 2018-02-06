@@ -16,10 +16,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class AuditExportCron extends AbstractCron
 {
-    /** @var EdgarEzAuditExportRepository  */
+    /** @var EdgarEzAuditExportRepository */
     private $exportRepository;
 
-    /** @var AuditService  */
+    /** @var AuditService */
     private $auditService;
 
     /** @var string */
@@ -54,7 +54,7 @@ class AuditExportCron extends AbstractCron
             $query = $this->exportRepository->processExport($export);
 
             $source = new DoctrineORMQuerySourceIterator($query, [
-                'user_id', 'infos', 'date', 'group_name', 'audit_name'
+                'user_id', 'infos', 'date', 'group_name', 'audit_name',
             ]);
             $now = new \DateTime();
             mkdir($this->storageDir);

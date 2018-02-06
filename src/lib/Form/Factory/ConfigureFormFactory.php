@@ -26,6 +26,7 @@ class ConfigureFormFactory
         ?string $name = null
     ): ?FormInterface {
         $name = 'edgarfilterauditstype';
+
         return $this->formFactory->createNamed(
             $name,
             ConfigureAuditType::class,

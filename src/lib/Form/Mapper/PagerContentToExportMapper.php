@@ -10,10 +10,10 @@ use Symfony\Component\Translation\Translator;
 
 class PagerContentToExportMapper
 {
-    /** @var UserService  */
+    /** @var UserService */
     private $userService;
 
-    /** @var Translator  */
+    /** @var Translator */
     private $translator;
 
     public function __construct(UserService $userService, Translator $translator)

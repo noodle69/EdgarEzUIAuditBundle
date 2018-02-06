@@ -8,7 +8,7 @@ use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\EzPublishCoreExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class EdgarEzUIAuditBundle extends  Bundle
+class EdgarEzUIAuditBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {

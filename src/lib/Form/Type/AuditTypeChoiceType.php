@@ -10,7 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AuditTypeChoiceType extends AbstractType
 {
-    /** @var AuditService  */
+    /** @var AuditService */
     protected $auditService;
 
     public function __construct(AuditService $auditService)

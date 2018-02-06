@@ -15,7 +15,7 @@ class ConfigureMenuListener implements TranslationContainerInterface
     const ITEM_AUDIT_CONFIGURE = 'main__audit__configure';
     const ITEM_AUDIT_EXPORT = 'main__audit__export';
 
-    /** @var PermissionResolver  */
+    /** @var PermissionResolver */
     private $permissionResolver;
 
     public function __construct(

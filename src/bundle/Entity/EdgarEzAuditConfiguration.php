@@ -5,7 +5,7 @@ namespace Edgar\EzUIAuditBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * EdgarEzAuditConfiguration
+ * EdgarEzAuditConfiguration.
  *
  * @ORM\Entity(repositoryClass="Edgar\EzUIAudit\Repository\EdgarEzAuditConfigurationRepository")
  * @ORM\Table(name="edgar_ez_audit_configuration")
@@ -31,12 +31,14 @@ class EdgarEzAuditConfiguration
     public function setId(int $id): self
     {
         $this->id = $id;
+
         return $this;
     }
 
     public function setAudits(array $audits): self
     {
         $this->audits = $audits;
+
         return $this;
     }
 

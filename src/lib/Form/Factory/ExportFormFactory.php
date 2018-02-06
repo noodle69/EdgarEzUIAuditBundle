@@ -26,6 +26,7 @@ class ExportFormFactory
         ?string $name = null
     ): ?FormInterface {
         $name = 'edgarexportauditstype';
+
         return $this->formFactory->createNamed(
             $name,
             ExportAuditType::class,

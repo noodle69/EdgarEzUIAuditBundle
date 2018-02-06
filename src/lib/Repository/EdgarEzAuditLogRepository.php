@@ -23,7 +23,7 @@ class EdgarEzAuditLogRepository extends EntityRepository
         $auditLog->setAuditIdentifier($auditIdentifier);
         $auditLog->setAuditName($auditName);
         $auditLog->setInfos($infos);
-        $auditLog->setDate(new \DateTime);
+        $auditLog->setDate(new \DateTime());
 
         $this->getEntityManager()->persist($auditLog);
         $this->getEntityManager()->flush();

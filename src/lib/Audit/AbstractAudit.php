@@ -7,7 +7,7 @@ use eZ\Publish\Core\SignalSlot\Slot;
 
 abstract class AbstractAudit extends Slot implements AuditInterface
 {
-    /** @var AuditService  */
+    /** @var AuditService */
     protected $auditService;
 
     /** @var array */
@@ -22,6 +22,7 @@ abstract class AbstractAudit extends Slot implements AuditInterface
     public function getIdentifier(): string
     {
         $classInfos = explode('\\', get_class($this));
+
         return $classInfos[count($classInfos) - 2] . '/' . $classInfos[count($classInfos) - 1];
     }
 
@@ -29,6 +30,7 @@ abstract class AbstractAudit extends Slot implements AuditInterface
     {
         $classInfos = explode('\\', get_class($this));
         $className = str_replace('Audit', '', $classInfos[count($classInfos) - 1]);
+
         return preg_replace('/(?<!^)([A-Z])/', ' \\1', $className);
     }
 
@@ -36,6 +38,7 @@ abstract class AbstractAudit extends Slot implements AuditInterface
     {
         $classInfos = explode('\\', get_class($this));
         $classGroup = $classInfos[count($classInfos) - 2];
+
         return preg_replace('/(?<!^)([A-Z])/', ' \\1', $classGroup);
     }
 

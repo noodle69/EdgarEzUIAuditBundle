@@ -27,6 +27,6 @@ class EdgarEzUIAuditExtension extends Extension implements PrependExtensionInter
 
     public function prepend(ContainerBuilder $container)
     {
-        $container->prependExtensionConfig('assetic', array('bundles' => array('EdgarEzUIAuditBundle')));
+        $container->prependExtensionConfig('assetic', ['bundles' => ['EdgarEzUIAuditBundle']]);
     }
 }

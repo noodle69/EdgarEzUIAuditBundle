@@ -11,16 +11,16 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 abstract class BaseController extends Controller
 {
-    /** @var AuditService  */
+    /** @var AuditService */
     protected $auditService;
 
-    /** @var PermissionResolver  */
+    /** @var PermissionResolver */
     protected $permissionResolver;
 
-    /** @var NotificationHandlerInterface  */
+    /** @var NotificationHandlerInterface */
     protected $notificationHandler;
 
-    /** @var TranslatorInterface  */
+    /** @var TranslatorInterface */
     protected $translator;
 
     public function __construct(
@@ -45,6 +45,7 @@ abstract class BaseController extends Controller
                     'edgarezuiaudit'
                 )
             );
+
             return new RedirectResponse($this->generateUrl('ezplatform.dashboard', []));
         }
 

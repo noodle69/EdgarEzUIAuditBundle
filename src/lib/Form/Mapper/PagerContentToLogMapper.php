@@ -8,7 +8,7 @@ use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 
 class PagerContentToLogMapper
 {
-    /** @var UserService  */
+    /** @var UserService */
     private $userService;
 
     public function __construct(UserService $userService)

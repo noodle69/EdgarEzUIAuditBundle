@@ -13,35 +13,34 @@ use eZ\Publish\API\Repository\PermissionResolver;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class AuditDashboardController extends BaseController
 {
-    /** @var FormFactory  */
+    /** @var FormFactory */
     protected $formFactory;
 
-    /** @var ExportFormFactory  */
+    /** @var ExportFormFactory */
     protected $exportFormFactory;
 
-    /** @var SubmitHandler  */
+    /** @var SubmitHandler */
     protected $submitHandler;
 
-    /** @var AuditService  */
+    /** @var AuditService */
     protected $auditService;
 
-    /** @var PermissionResolver  */
+    /** @var PermissionResolver */
     protected $permissionResolver;
 
-    /** @var NotificationHandlerInterface  */
+    /** @var NotificationHandlerInterface */
     protected $notificationHandler;
 
-    /** @var TranslatorInterface  */
+    /** @var TranslatorInterface */
     protected $translator;
 
-    /** @var PagerContentToLogMapper  */
+    /** @var PagerContentToLogMapper */
     protected $pagerContentToLogMapper;
 
     public function __construct(
@@ -113,6 +112,4 @@ class AuditDashboardController extends BaseController
             'form_filter_audit' => $filterAuditType->createView(),
         ]);
     }
-
-
 }

@@ -5,7 +5,7 @@ namespace Edgar\EzUIAuditBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * EdgarEzAuditExport
+ * EdgarEzAuditExport.
  *
  * @ORM\Entity(repositoryClass="Edgar\EzUIAudit\Repository\EdgarEzAuditExportRepository")
  * @ORM\Table(name="edgar_ez_audit_export")
@@ -73,48 +73,56 @@ class EdgarEzAuditExport
     public function setId(int $id): self
     {
         $this->id = $id;
+
         return $this;
     }
 
     public function setUserId(int $userId): self
     {
         $this->userId = $userId;
+
         return $this;
     }
 
     public function setDate(\DateTime $date): self
     {
         $this->date = $date;
+
         return $this;
     }
 
     public function setAudits(array $audits): self
     {
         $this->audits = $audits;
+
         return $this;
     }
 
     public function setDateStart(\DateTime $dateStart): self
     {
         $this->dateStart = $dateStart;
+
         return $this;
     }
 
     public function setDateEnd(\DateTime $dateEnd): self
     {
         $this->dateEnd = $dateEnd;
+
         return $this;
     }
 
     public function setStatus(int $status): self
     {
         $this->status = $status;
+
         return $this;
     }
 
     public function setFile(?string $file): self
     {
         $this->file = $file;
+
         return $this;
     }
 

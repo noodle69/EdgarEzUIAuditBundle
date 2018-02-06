@@ -12,11 +12,13 @@ class AuditData
 
     /**
      * @param string $identifier
+     *
      * @return AuditData
      */
     public function setIdentifier(string $identifier): self
     {
         $this->identifier = $identifier;
+
         return $this;
     }
 
@@ -31,16 +33,19 @@ class AuditData
     public function getGroupName(): string
     {
         $identifier = explode('/', $this->identifier);
+
         return $identifier[0];
     }
 
     /**
      * @param string $name
+     *
      * @return AuditData
      */
     public function setName(string $name): self
     {
         $this->name = $name;
+
         return $this;
     }
 

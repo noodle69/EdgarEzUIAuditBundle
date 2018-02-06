@@ -6,7 +6,7 @@ use Edgar\EzUIAudit\Audit\AuditInterface;
 
 class AuditHandler
 {
-    /** @var AuditInterface[] **/
+    /** @var AuditInterface[] * */
     private $audits = [];
 
     public function addAudit(AuditInterface $audit)
@@ -31,6 +31,5 @@ class AuditHandler
 
     public function getAuditsData(): array
     {
-
     }
 }

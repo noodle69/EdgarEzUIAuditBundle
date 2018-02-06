@@ -18,13 +18,13 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class AuditExportController extends BaseController
 {
-    /** @var PagerContentToExportMapper  */
+    /** @var PagerContentToExportMapper */
     protected $pagerContentToExportMapper;
 
-    /** @var ExportFormFactory  */
+    /** @var ExportFormFactory */
     protected $exportFormFactory;
 
-    /** @var SubmitHandler  */
+    /** @var SubmitHandler */
     protected $submitHandler;
 
     public function __construct(

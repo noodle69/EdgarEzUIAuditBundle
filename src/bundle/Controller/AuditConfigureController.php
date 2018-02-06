@@ -8,17 +8,16 @@ use Edgar\EzUIAudit\Form\SubmitHandler;
 use Edgar\EzUIAuditBundle\Service\AuditService;
 use eZ\Publish\API\Repository\PermissionResolver;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class AuditConfigureController extends BaseController
 {
-    /** @var ConfigureFormFactory  */
+    /** @var ConfigureFormFactory */
     protected $configureFormFactory;
 
-    /** @var SubmitHandler  */
+    /** @var SubmitHandler */
     protected $submitHandler;
 
     public function __construct(

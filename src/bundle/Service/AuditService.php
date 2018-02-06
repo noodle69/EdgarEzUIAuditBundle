@@ -20,19 +20,19 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class AuditService
 {
-    /** @var AuditHandler  */
+    /** @var AuditHandler */
     protected $auditHandler;
 
-    /** @var TokenStorage  */
+    /** @var TokenStorage */
     protected $tokenStorage;
 
-    /** @var EdgarEzAuditConfigurationRepository  */
+    /** @var EdgarEzAuditConfigurationRepository */
     protected $auditConfiguration;
 
-    /** @var EdgarEzAuditLogRepository  */
+    /** @var EdgarEzAuditLogRepository */
     protected $auditLog;
 
-    /** @var EdgarEzAuditExportRepository  */
+    /** @var EdgarEzAuditExportRepository */
     protected $auditExport;
 
     public function __construct(
@@ -53,6 +53,7 @@ class AuditService
         $audits = $this->auditHandler->getAudits();
         $auditGroups = array_keys($audits);
         ksort($auditGroups);
+
         return $auditGroups;
     }
 
@@ -112,7 +113,7 @@ class AuditService
 
         $classInfos = explode('\\', $classPath);
         $className = $classInfos[count($classInfos) - 1];
-        $groupName = $classInfos[count($classInfos) - 2];;
+        $groupName = $classInfos[count($classInfos) - 2];
         foreach ($audits as $audit) {
             if ($audit->getIdentifier() == $groupName . '/' . $className) {
                 return true;

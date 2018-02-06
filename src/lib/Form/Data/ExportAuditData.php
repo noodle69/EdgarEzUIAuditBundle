@@ -2,17 +2,15 @@
 
 namespace Edgar\EzUIAudit\Form\Data;
 
-use Edgar\EzUIAudit\Repository\EdgarEzAuditExportRepository;
-
 class ExportAuditData
 {
-    /** @var string|null  */
+    /** @var string|null */
     private $audit_types = [];
 
-    /** @var int|null  */
+    /** @var int|null */
     private $date_start;
 
-    /** @var int|null  */
+    /** @var int|null */
     private $date_end;
 
     public function __construct(
@@ -40,18 +38,21 @@ class ExportAuditData
     public function setAuditTypes(?string $audit_types): self
     {
         $this->audit_types = $audit_types;
+
         return $this;
     }
 
     public function setDateStart(?int $date_start): self
     {
         $this->date_start = $date_start;
+
         return $this;
     }
 
     public function setDateEnd(?int $date_end): self
     {
         $this->date_end = $date_end;
+
         return $this;
     }
 
@@ -62,21 +63,11 @@ class ExportAuditData
 
     public function getDateStart(): ?int
     {
-        /*
-        $dateStart = new \DateTime();
-        $dateStart->setTimestamp($this->date_end);
-        return $dateStart;
-        */
         return $this->date_start;
     }
 
     public function getDateEnd(): ?int
     {
-        /*
-        $dateEnd = new \DateTime();
-        $dateEnd->setTimestamp($this->date_end);
-        return $dateEnd;
-        */
         return $this->date_end;
     }
 }
