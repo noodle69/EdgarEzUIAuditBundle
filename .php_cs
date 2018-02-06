@@ -1,10 +1,5 @@
 <?php
 
-$header = <<<'EOF'
-@copyright Copyright (C) eZ Systems AS. All rights reserved.
-@license For full copyright and license information view LICENSE file distributed with this source code.
-EOF;
-
 return PhpCsFixer\Config::create()
     ->setRules([
         '@Symfony' => true,
@@ -18,12 +13,6 @@ return PhpCsFixer\Config::create()
         'blank_line_after_opening_tag' => false,
         'single_blank_line_before_namespace' => false,
         'space_after_semicolon' => false,
-        'header_comment' => [
-            'commentType' => 'PHPDoc',
-            'header' => $header,
-            'location' => 'after_open',
-            'separate' => 'top',
-        ],
         'yoda_style' => false,
         'no_break_comment' => false,
     ])

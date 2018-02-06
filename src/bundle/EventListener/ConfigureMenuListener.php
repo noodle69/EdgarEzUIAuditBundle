@@ -18,6 +18,11 @@ class ConfigureMenuListener implements TranslationContainerInterface
     /** @var PermissionResolver */
     private $permissionResolver;
 
+    /**
+     * ConfigureMenuListener constructor.
+     *
+     * @param PermissionResolver $permissionResolver
+     */
     public function __construct(
         PermissionResolver $permissionResolver
     ) {
@@ -25,6 +30,8 @@ class ConfigureMenuListener implements TranslationContainerInterface
     }
 
     /**
+     * Add Audit menu.
+     *
      * @param ConfigureMenuEvent $event
      */
     public function onMenuConfigure(ConfigureMenuEvent $event)
@@ -38,6 +45,11 @@ class ConfigureMenuListener implements TranslationContainerInterface
         }
     }
 
+    /**
+     * Add audit menu items.
+     *
+     * @param ItemInterface $auditMenu
+     */
     private function addAuditMenuItems(ItemInterface $auditMenu)
     {
         $menuItems = [];

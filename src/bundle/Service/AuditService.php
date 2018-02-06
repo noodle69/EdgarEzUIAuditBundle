@@ -35,6 +35,13 @@ class AuditService
     /** @var EdgarEzAuditExportRepository */
     protected $auditExport;
 
+    /**
+     * AuditService constructor.
+     *
+     * @param AuditHandler $auditHandler
+     * @param Registry $doctrineRegistry
+     * @param TokenStorage $tokenStorage
+     */
     public function __construct(
         AuditHandler $auditHandler,
         Registry $doctrineRegistry,
@@ -48,6 +55,11 @@ class AuditService
         $this->auditExport = $entityManager->getRepository(EdgarEzAuditExport::class);
     }
 
+    /**
+     * Load Audit type groups.
+     *
+     * @return array
+     */
     public function loadAuditTypeGroups(): array
     {
         $audits = $this->auditHandler->getAudits();
@@ -57,6 +69,13 @@ class AuditService
         return $auditGroups;
     }
 
+    /**
+     * Load audit types by group.
+     *
+     * @param string $auditTypeGroup
+     *
+     * @return array
+     */
     public function loadAuditTypes(string $auditTypeGroup): array
     {
         $audits = $this->auditHandler->getAudits();
@@ -77,6 +96,11 @@ class AuditService
         return $return;
     }
 
+    /**
+     * Get audit configuration.
+     *
+     * @return ConfigureAuditData
+     */
     public function getAuditConfiguration(): ConfigureAuditData
     {
         /** @var EdgarEzAuditConfiguration[] $auditConfigurations */
@@ -91,6 +115,11 @@ class AuditService
         return $configureAuditData;
     }
 
+    /**
+     * Save audit configuration.
+     *
+     * @param array $audits
+     */
     public function saveAuditConfiguration(array $audits)
     {
         /** @var EdgarEzAuditConfiguration[] $auditConfigurations */
@@ -105,6 +134,13 @@ class AuditService
         $this->auditConfiguration->save($auditConfiguration);
     }
 
+    /**
+     * Check if audit is configured.
+     *
+     * @param string $classPath
+     *
+     * @return bool
+     */
     public function isConfigured(string $classPath): bool
     {
         $auditConfiguration = $this->getAuditConfiguration();
@@ -123,6 +159,11 @@ class AuditService
         return false;
     }
 
+    /**
+     * Log audit informations.
+     *
+     * @param AuditInterface $audit
+     */
     public function log(AuditInterface $audit)
     {
         $user = $this->tokenStorage->getToken()->getUser();
@@ -131,16 +172,27 @@ class AuditService
         $this->auditLog->log($apiUser->id, $audit->getGroup(), $audit->getIdentifier(), $audit->getName(), $audit->getInfos());
     }
 
+    /**
+     * @param FilterAuditData $data
+     *
+     * @return QueryBuilder
+     */
     public function buildLogQuery(FilterAuditData $data): QueryBuilder
     {
         return $this->auditLog->buildQuery($data);
     }
 
+    /**
+     * @return QueryBuilder
+     */
     public function buildExportQuery(): QueryBuilder
     {
         return $this->auditExport->buildQuery();
     }
 
+    /**
+     * @param ExportAuditData $data
+     */
     public function saveExport(ExportAuditData $data)
     {
         $user = $this->tokenStorage->getToken()->getUser();

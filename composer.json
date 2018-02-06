@@ -1,11 +1,12 @@
 {
   "name": "edgar/ez-uiaudit-bundle",
-  "license": "GPL-2.0",
+  "license": "GPL-2.0-only",
   "type": "ezplatform-bundle",
   "description": "eZ Platform audit configuration and exploitation",
   "authors": [
     {
-      "name": "Emmanuel DROUET"
+      "name": "Emmanuel DROUET",
+      "email": "emmanuel.drouet@gmail.com"
     }
   ],
   "autoload": {

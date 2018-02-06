@@ -11,6 +11,10 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 class EdgarEzUIAuditExtension extends Extension implements PrependExtensionInterface
 {
+    /**
+     * @param array $configs
+     * @param ContainerBuilder $container
+     */
     public function load(array $configs, ContainerBuilder $container)
     {
         $loader = new YamlFileLoader(
@@ -25,6 +29,9 @@ class EdgarEzUIAuditExtension extends Extension implements PrependExtensionInter
         $loader->load('services.yml');
     }
 
+    /**
+     * @param ContainerBuilder $container
+     */
     public function prepend(ContainerBuilder $container)
     {
         $container->prependExtensionConfig('assetic', ['bundles' => ['EdgarEzUIAuditBundle']]);

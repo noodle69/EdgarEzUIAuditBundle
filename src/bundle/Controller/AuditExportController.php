@@ -27,6 +27,17 @@ class AuditExportController extends BaseController
     /** @var SubmitHandler */
     protected $submitHandler;
 
+    /**
+     * AuditExportController constructor.
+     *
+     * @param AuditService $auditService
+     * @param PermissionResolver $permissionResolver
+     * @param NotificationHandlerInterface $notificationHandler
+     * @param TranslatorInterface $translator
+     * @param PagerContentToExportMapper $pagerContentToExportMapper
+     * @param ExportFormFactory $exportFormFactory
+     * @param SubmitHandler $submitHandler
+     */
     public function __construct(
         AuditService $auditService,
         PermissionResolver $permissionResolver,
@@ -46,6 +57,13 @@ class AuditExportController extends BaseController
         $this->submitHandler = $submitHandler;
     }
 
+    /**
+     * Export audit informations.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
     public function exportAction(Request $request): Response
     {
         $this->permissionAccess('uiaudit', 'export');
@@ -67,6 +85,13 @@ class AuditExportController extends BaseController
         ]);
     }
 
+    /**
+     * Register audit export transaction.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
     public function askExportAction(Request $request): Response
     {
         $this->permissionAccess('uiaudit', 'export');

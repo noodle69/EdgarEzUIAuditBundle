@@ -9,6 +9,11 @@ class AuditHandler
     /** @var AuditInterface[] * */
     private $audits = [];
 
+    /**
+     * Register new Audit.
+     *
+     * @param AuditInterface $audit
+     */
     public function addAudit(AuditInterface $audit)
     {
         $classInfos = explode('\\', get_class($audit));
@@ -24,6 +29,11 @@ class AuditHandler
         $this->audits[$classGroup][$className] = $audit;
     }
 
+    /**
+     * List all audits.
+     *
+     * @return array
+     */
     public function getAudits(): array
     {
         return $this->audits;

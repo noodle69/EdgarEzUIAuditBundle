@@ -25,6 +25,15 @@ class AuditExportCron extends AbstractCron
     /** @var string */
     private $storageDir;
 
+    /**
+     * AuditExportCron constructor.
+     *
+     * @param null|string $name
+     * @param EntityManager $entityManager
+     * @param AuditService $auditService
+     * @param string $storageDir
+     * @param string $varDir
+     */
     public function __construct(
         ?string $name = null,
         EntityManager $entityManager,
@@ -38,6 +47,9 @@ class AuditExportCron extends AbstractCron
         $this->storageDir = $varDir . '/' . $storageDir;
     }
 
+    /**
+     * Configure cron.
+     */
     protected function configure()
     {
         $this
@@ -45,6 +57,14 @@ class AuditExportCron extends AbstractCron
             ->setDescription('Export audit informations');
     }
 
+    /**
+     * Execute cron export.
+     *
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     *
+     * @return int|null|void
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $export = $this->exportRepository->startExport();

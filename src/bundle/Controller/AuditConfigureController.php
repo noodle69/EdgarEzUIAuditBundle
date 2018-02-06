@@ -20,6 +20,16 @@ class AuditConfigureController extends BaseController
     /** @var SubmitHandler */
     protected $submitHandler;
 
+    /**
+     * AuditConfigureController constructor.
+     *
+     * @param ConfigureFormFactory $configureFormFactory
+     * @param SubmitHandler $submitHandler
+     * @param AuditService $auditService
+     * @param PermissionResolver $permissionResolver
+     * @param NotificationHandlerInterface $notificationHandler
+     * @param TranslatorInterface $translator
+     */
     public function __construct(
         ConfigureFormFactory $configureFormFactory,
         SubmitHandler $submitHandler,
@@ -37,6 +47,13 @@ class AuditConfigureController extends BaseController
         $this->translator = $translator;
     }
 
+    /**
+     * Configure which signals should be audited.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
     public function configureAction(Request $request): Response
     {
         $this->permissionAccess('uiaudit', 'configure');

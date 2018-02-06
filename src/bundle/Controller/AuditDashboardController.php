@@ -43,6 +43,18 @@ class AuditDashboardController extends BaseController
     /** @var PagerContentToLogMapper */
     protected $pagerContentToLogMapper;
 
+    /**
+     * AuditDashboardController constructor.
+     *
+     * @param FormFactory $formFactory
+     * @param ExportFormFactory $exportFormFactory
+     * @param SubmitHandler $submitHandler
+     * @param AuditService $auditService
+     * @param PermissionResolver $permissionResolver
+     * @param NotificationHandlerInterface $notificationHandler
+     * @param TranslatorInterface $translator
+     * @param PagerContentToLogMapper $pagerContentToLogMapper
+     */
     public function __construct(
         FormFactory $formFactory,
         ExportFormFactory $exportFormFactory,
@@ -64,6 +76,13 @@ class AuditDashboardController extends BaseController
         $this->pagerContentToLogMapper = $pagerContentToLogMapper;
     }
 
+    /**
+     * Display audit dashboard.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
     public function dashboardAction(Request $request): Response
     {
         $this->permissionAccess('uiaudit', 'bookmark');

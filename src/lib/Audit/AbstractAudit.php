@@ -13,12 +13,22 @@ abstract class AbstractAudit extends Slot implements AuditInterface
     /** @var array */
     protected $infos = [];
 
+    /**
+     * AbstractAudit constructor.
+     *
+     * @param AuditService $auditService
+     */
     public function __construct(
         AuditService $auditService
     ) {
         $this->auditService = $auditService;
     }
 
+    /**
+     * Get audit identifier.
+     *
+     * @return string
+     */
     public function getIdentifier(): string
     {
         $classInfos = explode('\\', get_class($this));
@@ -26,6 +36,11 @@ abstract class AbstractAudit extends Slot implements AuditInterface
         return $classInfos[count($classInfos) - 2] . '/' . $classInfos[count($classInfos) - 1];
     }
 
+    /**
+     * Get audit name.
+     *
+     * @return string
+     */
     public function getName(): string
     {
         $classInfos = explode('\\', get_class($this));
@@ -34,6 +49,11 @@ abstract class AbstractAudit extends Slot implements AuditInterface
         return preg_replace('/(?<!^)([A-Z])/', ' \\1', $className);
     }
 
+    /**
+     * Get audit group.
+     *
+     * @return string
+     */
     public function getGroup(): string
     {
         $classInfos = explode('\\', get_class($this));

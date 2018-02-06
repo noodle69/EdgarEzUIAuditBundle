@@ -23,6 +23,14 @@ abstract class BaseController extends Controller
     /** @var TranslatorInterface */
     protected $translator;
 
+    /**
+     * BaseController constructor.
+     *
+     * @param AuditService $auditService
+     * @param PermissionResolver $permissionResolver
+     * @param NotificationHandlerInterface $notificationHandler
+     * @param TranslatorInterface $translator
+     */
     public function __construct(
         AuditService $auditService,
         PermissionResolver $permissionResolver,
@@ -35,6 +43,14 @@ abstract class BaseController extends Controller
         $this->translator = $translator;
     }
 
+    /**
+     * Check if user has persmission to access to audit.
+     *
+     * @param string $module
+     * @param string $function
+     *
+     * @return null|RedirectResponse
+     */
     protected function permissionAccess(string $module, string $function): ?RedirectResponse
     {
         if (!$this->permissionResolver->hasAccess($module, $function)) {

@@ -9,6 +9,9 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class AuditPass implements CompilerPassInterface
 {
+    /**
+     * @param ContainerBuilder $container
+     */
     public function process(ContainerBuilder $container)
     {
         if (!$container->has(AuditHandler::class)) {
