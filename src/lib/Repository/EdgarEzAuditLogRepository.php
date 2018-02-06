@@ -10,6 +10,16 @@ use Edgar\EzUIAuditBundle\Entity\EdgarEzAuditLog;
 
 class EdgarEzAuditLogRepository extends EntityRepository
 {
+    /**
+     * @param int $userId
+     * @param string $groupName
+     * @param string $auditIdentifier
+     * @param string $auditName
+     * @param array $infos
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function log(
         int $userId,
         string $groupName,
@@ -29,6 +39,11 @@ class EdgarEzAuditLogRepository extends EntityRepository
         $this->getEntityManager()->flush();
     }
 
+    /**
+     * @param FilterAuditData $data
+     *
+     * @return QueryBuilder
+     */
     public function buildQuery(FilterAuditData $data): QueryBuilder
     {
         $entityManager = $this->getEntityManager();

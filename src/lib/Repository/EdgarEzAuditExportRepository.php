@@ -18,6 +18,9 @@ class EdgarEzAuditExportRepository extends EntityRepository
     public const STATUS_OK = 2;
     public const STATUS_KO = -1;
 
+    /**
+     * @return QueryBuilder
+     */
     public function buildQuery(): QueryBuilder
     {
         $entityManager = $this->getEntityManager();
@@ -30,6 +33,13 @@ class EdgarEzAuditExportRepository extends EntityRepository
         return $queryBuilder;
     }
 
+    /**
+     * @param ExportAuditData $data
+     * @param int $userId
+     *
+     * @throws ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function save(ExportAuditData $data, int $userId)
     {
         $auditData = new EdgarEzAuditExport();
@@ -51,6 +61,9 @@ class EdgarEzAuditExportRepository extends EntityRepository
         $this->getEntityManager()->flush();
     }
 
+    /**
+     * @return EdgarEzAuditExport|null
+     */
     public function startExport(): ?EdgarEzAuditExport
     {
         $entityManager = $this->getEntityManager();
@@ -86,6 +99,11 @@ class EdgarEzAuditExportRepository extends EntityRepository
         return null;
     }
 
+    /**
+     * @param EdgarEzAuditExport $export
+     *
+     * @return Query
+     */
     public function processExport(EdgarEzAuditExport $export): Query
     {
         $entityManager = $this->getEntityManager();
@@ -113,6 +131,13 @@ class EdgarEzAuditExportRepository extends EntityRepository
         return $queryBuilder->getQuery();
     }
 
+    /**
+     * @param EdgarEzAuditExport $export
+     * @param string $file
+     *
+     * @throws ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function endExport(EdgarEzAuditExport $export, string $file)
     {
         $export->setStatus(self::STATUS_OK);

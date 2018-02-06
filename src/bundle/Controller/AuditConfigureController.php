@@ -2,6 +2,7 @@
 
 namespace Edgar\EzUIAuditBundle\Controller;
 
+use Doctrine\ORM\ORMException;
 use Edgar\EzUIAudit\Form\Data\ConfigureAuditData;
 use Edgar\EzUIAudit\Form\Factory\ConfigureFormFactory;
 use Edgar\EzUIAudit\Form\SubmitHandler;
@@ -65,7 +66,17 @@ class AuditConfigureController extends BaseController
 
         if ($configureAuditType->isSubmitted() && $configureAuditType->isValid()) {
             $result = $this->submitHandler->handle($configureAuditType, function (ConfigureAuditData $data) use ($configureAuditType) {
-                $this->auditService->saveAuditConfiguration($data->getAuditTypes());
+                try {
+                    $this->auditService->saveAuditConfiguration($data->getAuditTypes());
+                } catch (ORMException $e) {
+                    $this->notificationHandler->success(
+                        $this->translator->trans(
+                            'edgar.ezuiaudit.configure.error %message%',
+                            ['%message%' => $e->getMessage()],
+                            'edgarezuiaudit'
+                        )
+                    );
+                }
 
                 $this->notificationHandler->success(
                     $this->translator->trans(

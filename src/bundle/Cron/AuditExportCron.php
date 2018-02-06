@@ -3,6 +3,7 @@
 namespace Edgar\EzUIAuditBundle\Cron;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\ORMException;
 use Doctrine\ORM\Query;
 use Edgar\Cron\Cron\AbstractCron;
 use Edgar\EzUIAudit\Repository\EdgarEzAuditExportRepository;
@@ -82,7 +83,11 @@ class AuditExportCron extends AbstractCron
             $writer = new CsvWriter($csvFile);
             Handler::create($source, $writer)->export();
 
-            $this->exportRepository->endExport($export, $csvFile);
+            try {
+                $this->exportRepository->endExport($export, $csvFile);
+            } catch (ORMException $e) {
+                $output->writeln('Fail to export audit: ' . $e->getMessage());
+            }
         }
     }
 }

@@ -3,6 +3,7 @@
 namespace Edgar\EzUIAuditBundle\Service;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
+use Doctrine\ORM\ORMException;
 use Doctrine\ORM\QueryBuilder;
 use Edgar\EzUIAudit\Audit\AuditInterface;
 use Edgar\EzUIAudit\Form\Data\AuditData;
@@ -119,6 +120,8 @@ class AuditService
      * Save audit configuration.
      *
      * @param array $audits
+     *
+     * @throws ORMException
      */
     public function saveAuditConfiguration(array $audits)
     {
@@ -131,7 +134,11 @@ class AuditService
         }
         $auditConfiguration->setAudits($audits);
 
-        $this->auditConfiguration->save($auditConfiguration);
+        try {
+            $this->auditConfiguration->save($auditConfiguration);
+        } catch (ORMException $e) {
+            throw $e;
+        }
     }
 
     /**
@@ -169,7 +176,10 @@ class AuditService
         $user = $this->tokenStorage->getToken()->getUser();
         $apiUser = $user->getAPIUser();
 
-        $this->auditLog->log($apiUser->id, $audit->getGroup(), $audit->getIdentifier(), $audit->getName(), $audit->getInfos());
+        try {
+            $this->auditLog->log($apiUser->id, $audit->getGroup(), $audit->getIdentifier(), $audit->getName(), $audit->getInfos());
+        } catch (ORMException $e) {
+        }
     }
 
     /**
@@ -198,6 +208,9 @@ class AuditService
         $user = $this->tokenStorage->getToken()->getUser();
         $apiUser = $user->getAPIUser();
 
-        $this->auditExport->save($data, $apiUser->id);
+        try {
+            $this->auditExport->save($data, $apiUser->id);
+        } catch (ORMException $e) {
+        }
     }
 }
