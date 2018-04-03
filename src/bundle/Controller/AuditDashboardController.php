@@ -85,7 +85,7 @@ class AuditDashboardController extends BaseController
      */
     public function dashboardAction(Request $request): Response
     {
-        $this->permissionAccess('uiaudit', 'bookmark');
+        $this->permissionAccess('uiaudit', 'dashboard');
 
         $filterAuditType = $this->formFactory->filterAudit(
             new FilterAuditData()
