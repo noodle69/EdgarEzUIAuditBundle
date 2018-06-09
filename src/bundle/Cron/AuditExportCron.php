@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\Query;
 use Edgar\Cron\Cron\AbstractCron;
+use Edgar\Cron\Repository\EdgarCronRepository;
 use Edgar\EzUIAudit\Repository\EdgarEzAuditExportRepository;
 use Edgar\EzUIAuditBundle\Entity\EdgarEzAuditExport;
 use Edgar\EzUIAuditBundle\Service\AuditService;
@@ -17,11 +18,19 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class AuditExportCron extends AbstractCron
 {
+    const EXPORT_DIR = '_export';
+
     /** @var EdgarEzAuditExportRepository */
     private $exportRepository;
 
     /** @var AuditService */
     private $auditService;
+
+    /** @var string  */
+    private $kernelRootDir;
+
+    /** @var string  */
+    private $varDir;
 
     /** @var string */
     private $storageDir;
@@ -32,20 +41,24 @@ class AuditExportCron extends AbstractCron
      * @param null|string $name
      * @param EntityManager $entityManager
      * @param AuditService $auditService
-     * @param string $storageDir
+     * @param string $kernelRootDir
      * @param string $varDir
+     * @param string $storageDir
      */
     public function __construct(
         ?string $name = null,
         EntityManager $entityManager,
         AuditService $auditService,
-        string $storageDir,
-        string $varDir
+        string $kernelRootDir,
+        string $varDir,
+        string $storageDir
     ) {
         parent::__construct($name);
         $this->exportRepository = $entityManager->getRepository(EdgarEzAuditExport::class);
         $this->auditService = $auditService;
-        $this->storageDir = $varDir . '/' . $storageDir;
+        $this->kernelRootDir = $kernelRootDir;
+        $this->varDir = $varDir;
+        $this->storageDir = $storageDir;
     }
 
     /**
@@ -78,8 +91,21 @@ class AuditExportCron extends AbstractCron
                 'user_id', 'infos', 'date', 'group_name', 'audit_name',
             ]);
             $now = new \DateTime();
-            mkdir($this->storageDir);
-            $csvFile = $this->storageDir . '/audit_export_' . $now->getTimestamp() . '.csv';
+
+            $exportDir = $this->kernelRootDir . '/../web/' . $this->varDir . '/' . $this->storageDir. '/' . self::EXPORT_DIR;
+            if (!is_dir($exportDir)) {
+                if (!@mkdir($exportDir, 0777, true)) {
+                    $output->writeln('Fial to create export directory');
+                    try {
+                        $this->exportRepository->setStatus($export, EdgarEzAuditExportRepository::STATUS_KO);
+                    } catch (ORMException $e) {
+                        $output->writeln('Fail to create export directory');
+                    }
+                    return EdgarCronRepository::STATUS_ERROR;
+                }
+            }
+
+            $csvFile = $exportDir . '/audit_export_' . $now->getTimestamp() . '.csv';
             $writer = new CsvWriter($csvFile);
             Handler::create($source, $writer)->export();
 
@@ -87,6 +113,12 @@ class AuditExportCron extends AbstractCron
                 $this->exportRepository->endExport($export, $csvFile);
             } catch (ORMException $e) {
                 $output->writeln('Fail to export audit: ' . $e->getMessage());
+                try {
+                    $this->exportRepository->setStatus($export, EdgarEzAuditExportRepository::STATUS_KO);
+                } catch (ORMException $e) {
+                    $output->writeln('Fail to export audit: ' . $e->getMessage());
+                }
+                return EdgarCronRepository::STATUS_ERROR;
             }
         }
     }

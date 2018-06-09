@@ -145,4 +145,18 @@ class EdgarEzAuditExportRepository extends EntityRepository
         $this->getEntityManager()->persist($export);
         $this->getEntityManager()->flush();
     }
+
+    /**
+     * @param EdgarEzAuditExport $export
+     * @param int $status
+     *
+     * @throws ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function setStatus(EdgarEzAuditExport $export, int $status)
+    {
+        $export->setStatus($status);
+        $this->getEntityManager()->persist($export);
+        $this->getEntityManager()->flush();
+    }
 }

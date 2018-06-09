@@ -14,8 +14,9 @@ services:
 
     Edgar\EzUIAuditBundle\Cron\AuditExportCron:
         arguments:
-            $storageDir: "%ezsettings.default.storage_dir%"
-            $varDir: "%ezsettings.default.var_dir%"
+            $kernelRootDir: "%kernel.root_dir%"
+            $varDir: "$var_dir;ezsettings$"
+            $storageDir: "$storage_dir$"
         tags:
             - { name: "edgar.cron", alias: "audit_export", priority: 100, expression: "*/5 * * * *" }
 
