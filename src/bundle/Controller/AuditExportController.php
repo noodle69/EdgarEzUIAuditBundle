@@ -2,10 +2,12 @@
 
 namespace Edgar\EzUIAuditBundle\Controller;
 
+use Doctrine\Bundle\DoctrineBundle\Registry;
 use Edgar\EzUIAudit\Form\Data\ExportAuditData;
 use Edgar\EzUIAudit\Form\Factory\ExportFormFactory;
 use Edgar\EzUIAudit\Form\Mapper\PagerContentToExportMapper;
 use Edgar\EzUIAudit\Form\SubmitHandler;
+use Edgar\EzUIAuditBundle\Entity\EdgarEzAuditExport;
 use Edgar\EzUIAuditBundle\Service\AuditService;
 use eZ\Publish\API\Repository\PermissionResolver;
 use EzSystems\EzPlatformAdminUi\Notification\NotificationHandlerInterface;
@@ -27,6 +29,8 @@ class AuditExportController extends BaseController
     /** @var SubmitHandler */
     protected $submitHandler;
 
+    protected $exportRepository;
+
     /**
      * AuditExportController constructor.
      *
@@ -45,7 +49,8 @@ class AuditExportController extends BaseController
         TranslatorInterface $translator,
         PagerContentToExportMapper $pagerContentToExportMapper,
         ExportFormFactory $exportFormFactory,
-        SubmitHandler $submitHandler
+        SubmitHandler $submitHandler,
+        Registry $doctrineRegistry
     ) {
         parent::__construct($auditService, $permissionResolver, $notificationHandler, $translator);
         $this->auditService = $auditService;
@@ -55,6 +60,9 @@ class AuditExportController extends BaseController
         $this->pagerContentToExportMapper = $pagerContentToExportMapper;
         $this->exportFormFactory = $exportFormFactory;
         $this->submitHandler = $submitHandler;
+
+        $entityManager = $doctrineRegistry->getEntityManager();
+        $this->exportRepository = $entityManager->getRepository(EdgarEzAuditExport::class);
     }
 
     /**
@@ -114,5 +122,23 @@ class AuditExportController extends BaseController
         }
 
         return new RedirectResponse($this->generateUrl('edgar.audit.export', []));
+    }
+
+    /**
+     * @param EdgarEzAuditExport $exportId
+     *
+     * @return Response
+     */
+    public function downloadAction(int $exportId): Response
+    {
+        $this->permissionAccess('uiaudit', 'export');
+
+        $export = $this->exportRepository->find($exportId);
+
+        $filePath = $export->getFile();
+        $response = new Response(file_get_contents($filePath));
+        $response->headers->set('Content-Type', 'text/csv');
+
+        return $response;
     }
 }

@@ -5,7 +5,13 @@
     <td>{{ row.date_end|localizeddate('short', 'short', app.request.locale) }}</td>
     <td>{{ row.date|localizeddate('short', 'short', app.request.locale) }}</td>
     <td>{{ row.status }}</td>
-    <td>{{ row.file }}</td>
+    <td>
+        {% if row.file is not empty %}
+            <a href="{{ path('edgar.audit.export.download', {'exportId': row.id, 'filename': row.file}) }}">
+                {{ 'export.download'|trans|desc('Download') }}
+            </a>
+        {% endif %}
+    </td>
     <td>
         <a href="#" class="audit-export audit-export-up">
             <svg class="ez-icon ez-icon-caret-down">

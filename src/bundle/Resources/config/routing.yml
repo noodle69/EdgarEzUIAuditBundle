@@ -18,3 +18,10 @@ edgar.audit.export.ask:
     methods: ['POST']
     defaults:
         _controller: 'EdgarEzUIAuditBundle:AuditExport:askExport'
+
+edgar.audit.export.download:
+    path: /audit/export/download/{exportId}/{filename}
+    defaults:
+        _controller: 'EdgarEzUIAuditBundle:AuditExport:download'
+    requirements:
+        exportId: \d+

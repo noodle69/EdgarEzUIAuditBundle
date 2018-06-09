@@ -29,6 +29,7 @@ class PagerContentToLogMapper
             }
 
             $data[] = [
+                'id' => $content->getId(),
                 'user_id' => $content->getUserId(),
                 'user_name' => $userName,
                 'group_name' => $content->getGroupName(),

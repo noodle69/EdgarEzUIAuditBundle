@@ -2,6 +2,9 @@ imports:
     - { resource: controllers.yml }
     - { resource: audits.yml }
 
+parameters:
+    edgar.ezuiadit.param_converter.export.priority: 0
+
 services:
     _defaults:
         autowire: true

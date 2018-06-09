@@ -48,6 +48,7 @@ class PagerContentToExportMapper
             }
 
             $data[] = [
+                'id' => $content->getId(),
                 'user_id' => $content->getUserId(),
                 'user_name' => $userName,
                 'audits' => $content->getAudits(),
@@ -55,7 +56,7 @@ class PagerContentToExportMapper
                 'date_end' => $content->getDateEnd(),
                 'date' => $content->getDate(),
                 'status' => $status,
-                'file' => $content->getFile(),
+                'file' => $content->getFile() ? basename($content->getFile()) : false,
             ];
         }
 
