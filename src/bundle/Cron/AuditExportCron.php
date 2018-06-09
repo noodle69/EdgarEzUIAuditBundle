@@ -3,18 +3,18 @@
 namespace Edgar\EzUIAuditBundle\Cron;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Internal\Hydration\IterableResult;
 use Doctrine\ORM\ORMException;
-use Doctrine\ORM\Query;
 use Edgar\Cron\Cron\AbstractCron;
 use Edgar\Cron\Repository\EdgarCronRepository;
 use Edgar\EzUIAudit\Repository\EdgarEzAuditExportRepository;
 use Edgar\EzUIAuditBundle\Entity\EdgarEzAuditExport;
 use Edgar\EzUIAuditBundle\Service\AuditService;
-use Exporter\Handler;
-use Exporter\Source\DoctrineORMQuerySourceIterator;
-use Exporter\Writer\CsvWriter;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Serializer\Encoder\CsvEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class AuditExportCron extends AbstractCron
 {
@@ -84,12 +84,24 @@ class AuditExportCron extends AbstractCron
         $export = $this->exportRepository->startExport();
 
         if ($export) {
-            /** @var Query $query */
-            $query = $this->exportRepository->processExport($export);
+            /** @var IterableResult $result */
+            $result = $this->exportRepository->processExport($export);
 
-            $source = new DoctrineORMQuerySourceIterator($query, [
-                'user_id', 'infos', 'date', 'group_name', 'audit_name',
-            ]);
+            $data = [];
+            while (false !== ($row = $result->next())) {
+                $arrayRow = (array)$row[0];
+                array_walk($arrayRow, function(&$exportData, $key) {
+                    if ($exportData instanceof \DateTime) {
+                        $exportData = $exportData->format('Y-m-d H:i:s');
+                    } else if (is_array($exportData)) {
+                        array_walk($exportData, function(&$data, $key) {
+                            $data = $key . ': ' . $data;
+                        });
+                        $exportData = implode("\n", $exportData);
+                    }
+                });
+                $data[] = $arrayRow;
+            }
             $now = new \DateTime();
 
             $exportDir = $this->kernelRootDir . '/../web/' . $this->varDir . '/' . $this->storageDir. '/' . self::EXPORT_DIR;
@@ -106,8 +118,11 @@ class AuditExportCron extends AbstractCron
             }
 
             $csvFile = $exportDir . '/audit_export_' . $now->getTimestamp() . '.csv';
-            $writer = new CsvWriter($csvFile);
-            Handler::create($source, $writer)->export();
+            $serializer = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
+            file_put_contents(
+                $csvFile,
+                $serializer->encode($data, 'csv')
+            );
 
             try {
                 $this->exportRepository->endExport($export, $csvFile);

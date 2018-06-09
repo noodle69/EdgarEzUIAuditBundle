@@ -129,15 +129,17 @@ class AuditExportController extends BaseController
      *
      * @return Response
      */
-    public function downloadAction(int $exportId): Response
+    public function downloadAction(int $exportId, string $filename): Response
     {
         $this->permissionAccess('uiaudit', 'export');
 
         $export = $this->exportRepository->find($exportId);
 
         $filePath = $export->getFile();
-        $response = new Response(file_get_contents($filePath));
-        $response->headers->set('Content-Type', 'text/csv');
+        $response = new Response();
+        $response->setContent(file_get_contents($filePath));
+        $response->headers->set('Content-Type', 'text/csv; charset=utf-8');
+        $response->headers->set('Content-Disposition','attachment; filename="' . $filename . '"');
 
         return $response;
     }

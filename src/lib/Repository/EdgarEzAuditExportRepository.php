@@ -3,6 +3,7 @@
 namespace Edgar\EzUIAudit\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Internal\Hydration\IterableResult;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\Query;
@@ -104,7 +105,7 @@ class EdgarEzAuditExportRepository extends EntityRepository
      *
      * @return Query
      */
-    public function processExport(EdgarEzAuditExport $export): Query
+    public function processExport(EdgarEzAuditExport $export): IterableResult
     {
         $entityManager = $this->getEntityManager();
 
@@ -128,7 +129,7 @@ class EdgarEzAuditExportRepository extends EntityRepository
             ->setParameter('date_start', $export->getDateStart())
             ->setParameter('date_end', $export->getDateEnd());
 
-        return $queryBuilder->getQuery();
+        return $queryBuilder->getQuery()->iterate(null, Query::HYDRATE_ARRAY);
     }
 
     /**
