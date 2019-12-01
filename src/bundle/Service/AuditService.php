@@ -17,15 +17,15 @@ use Edgar\EzUIAudit\Repository\EdgarEzAuditLogRepository;
 use Edgar\EzUIAuditBundle\Entity\EdgarEzAuditConfiguration;
 use Edgar\EzUIAuditBundle\Entity\EdgarEzAuditExport;
 use Edgar\EzUIAuditBundle\Entity\EdgarEzAuditLog;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use eZ\Publish\Core\Repository\Permission\PermissionResolver;
 
 class AuditService
 {
     /** @var AuditHandler */
     protected $auditHandler;
 
-    /** @var TokenStorage */
-    protected $tokenStorage;
+    /** @var PermissionResolver */
+    protected $permissionResolver;
 
     /** @var EdgarEzAuditConfigurationRepository */
     protected $auditConfiguration;
@@ -41,15 +41,15 @@ class AuditService
      *
      * @param AuditHandler $auditHandler
      * @param Registry $doctrineRegistry
-     * @param TokenStorage $tokenStorage
+     * @param PermissionResolver $permissionResolver
      */
     public function __construct(
         AuditHandler $auditHandler,
         Registry $doctrineRegistry,
-        TokenStorage $tokenStorage
+        PermissionResolver $permissionResolver
     ) {
         $this->auditHandler = $auditHandler;
-        $this->tokenStorage = $tokenStorage;
+        $this->permissionResolver = $permissionResolver;
         $entityManager = $doctrineRegistry->getManager();
         $this->auditConfiguration = $entityManager->getRepository(EdgarEzAuditConfiguration::class);
         $this->auditLog = $entityManager->getRepository(EdgarEzAuditLog::class);
@@ -173,11 +173,8 @@ class AuditService
      */
     public function log(AuditInterface $audit)
     {
-        $user = $this->tokenStorage->getToken()->getUser();
-        $apiUser = $user->getAPIUser();
-
         try {
-            $this->auditLog->log($apiUser->id, $audit->getGroup(), $audit->getIdentifier(), $audit->getName(), $audit->getInfos());
+            $this->auditLog->log($this->getApiUser()->getUserId(), $audit->getGroup(), $audit->getIdentifier(), $audit->getName(), $audit->getInfos());
         } catch (ORMException $e) {
         }
     }
@@ -205,12 +202,17 @@ class AuditService
      */
     public function saveExport(ExportAuditData $data)
     {
-        $user = $this->tokenStorage->getToken()->getUser();
-        $apiUser = $user->getAPIUser();
-
         try {
-            $this->auditExport->save($data, $apiUser->id);
+            $this->auditExport->save($data, $this->getApiUser()->getUserId());
         } catch (ORMException $e) {
         }
+    }
+
+    /**
+     * @return \eZ\Publish\API\Repository\Values\User\UserReference
+     */
+    public function getApiUser()
+    {
+        return $this->permissionResolver->getCurrentUserReference();
     }
 }
